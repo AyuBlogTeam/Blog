@@ -3,6 +3,7 @@ import WriteUi from './wirteUi';
 import E from 'wangeditor'
 import { post } from 'Common/axios.js'
 import { message } from 'antd'
+import IPserver from 'IPserver';
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -142,7 +143,7 @@ class Write extends Component {
             return
         }
         
-        post("http://localhost:8081/articals/addartical.php",{
+        post(IPserver + "articals/addartical.php",{
             title:this.state.articalTitle,
             summary:this.state.articalSummary,
             kind:this.state.articalKind,

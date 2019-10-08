@@ -13,18 +13,21 @@ import IndexList from "@/components/Index/IndexList.vue";
   }
 })
 export default class HelloWorld extends Vue {
-  private content:string = '<p>123</p>'
+  private content: string = "";
 
   mounted() {
-    this.getArtical(this.$route.params.queryId)
+    document.documentElement.scrollTop = 0
+    this.getArtical(this.$route.params.queryId);
   }
 
-  private getArtical(id:string) {
-    this.$http.get("http://localhost:8081/articals/getOneArtical.php",{
-      articalid:id
-    }).then((res)=>{
-      this.content = res.content
-    })
+  private getArtical(id: string) {
+    this.$http
+      .get("http://localhost:8081/articals/getOneArtical.php", {
+        articalid: id
+      })
+      .then((res: any) => {
+        this.content = res.content;
+      });
   }
 }
 </script>

@@ -21,3 +21,22 @@ a, button, input[type="button"], input[type="submit"]
 ul,li,ol{
   list-style none
 }
+
+/* 重写滚动条样式 */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bbb;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-input-placeholder {
+  color: #bbb;
+}
