@@ -1,0 +1,118 @@
+{
+    "particles": {
+      "number": {
+        "value": 100,//数量
+        "density": {
+          "enable": true,//是否显示
+          "value_area": 800//区域散步密度大小
+        }
+      },
+      "color": {
+        "value": "#ffffff"//原子的颜色
+      },
+      "shape": {
+        "type": "star",//原子的形状
+        "stroke": {
+          "width": 0,//原子的宽度
+          "color": "#000000"//原子的颜色
+        },
+        "polygon": {
+          "nb_sides": 5//原子的多边形边数
+        },
+        "image": {
+          "src": "img/github.svg",//原子的图片可以使用自定义图片
+          "width": 100,//图片宽度
+          "height": 100//图片高度
+        }
+      },
+      "opacity": {
+        "value": 0.5,//不透明度
+        "random": false,//随机不透明度
+        "anim": {
+          "enable": false,//渐变动画
+          "speed": 1,//渐变动画速度
+          "opacity_min": 0.1,//渐变动画不透明度
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 5,//原子大小
+        "random": true,//原子大小随机
+        "anim": {
+          "enable": false,//原子渐变
+          "speed": 40,//原子渐变速度
+          "size_min": 0.1,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": true,//连接线
+        "distance": 150,//连接线距离
+        "color": "#ffffff",//连接线颜色
+        "opacity": 0.4,//连接线不透明度
+        "width": 1//连接线的宽度
+      },
+      "move": {
+        "enable": true,//原子移动
+        "speed": 6,//原子移动速度
+        "direction": "none",// 原子移动方向
+        "random": false,//移动随机方向
+        "straight": false,//直接移动
+        "out_mode": "out",//是否移动出画布
+        "bounce":"false",//是否跳动移动
+        "attract": {
+          "enable": false,//原子之间吸引
+          "rotateX": 600,//原子之间吸引X水平距离
+          "rotateY": 1200//y垂直距离
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",//原子之间互动检测
+      "events": {
+        "onhover": {
+          "enable": true,// 悬停
+          "mode": "repulse"//悬停模式 "grab"抓取临近的"bubble"泡沫球效果"repulse"  击退效果
+        },
+        "onclick": {
+          "enable": false,//点击效果
+          "mode": "push"//点击效果模式
+        },
+        "resize": true//互动事件调整
+      },
+      "modes": {
+        "grab": {
+          "distance": 400,//原子互动抓取距离
+          "line_linked": {
+            "opacity": 1//原子互动抓取距离连线不透明度
+          }
+        },
+        "bubble": {
+          "distance": 400,//原子抓取泡沫效果之间的距离
+          "size": 40,//原子抓取泡沫效果之间的大小
+          "duration": 2,//原子抓取泡沫效果之间的持续事件
+          "opacity": 8,
+          "speed": 3
+        },
+        "repulse": {
+          "distance": 200,//击退效果距离
+          "duration":2//击退效果持续事件
+        },
+        "push": {
+          "particles_nb": 4//粒子推出的数量
+        },
+        "remove": {
+          "particles_nb": 2
+        }
+      }
+    },
+    "retina_detect": true,
+    "config_demo": {
+      "hide_card": false,
+      "background_color": "#b61924",
+      "background_image": "",
+      "background_position": "50% 50%",
+      "background_repeat": "no-repeat",
+      "background_size": "cover"
+    }
+  }
