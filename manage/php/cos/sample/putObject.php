@@ -12,10 +12,10 @@ $cosClient = new Qcloud\Cos\Client(
         'credentials'=> array(
             'secretId'  => $secretId ,
             'secretKey' => $secretKey)));
-$local_path = "./../upload.php";
+$local_path = "./../composer.json";
 try {
     $result = $cosClient->putObject(array(
-        'Bucket' => 'examplebucket-125000000', //格式：BucketName-APPID
+        'Bucket' => 'ayu-1256571018/blog', //格式：BucketName-APPID
         'Key' => 'exampleobject',
         'Body' => fopen($local_path, 'rb'),
         /*
