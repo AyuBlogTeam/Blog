@@ -45,13 +45,7 @@ export default class IndexList extends Vue {
   }
 
   private toArticleDetail(name: string,id:string) {
-    this.$router.push({
-      name:`article`,
-      params:{
-        id:name,
-        queryId:id
-      }
-    });
+    this.$emit("toArticleDetail",name,id)
   }
 }
 </script>

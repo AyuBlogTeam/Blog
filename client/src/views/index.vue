@@ -1,5 +1,7 @@
 <template>
-  <IndexList />
+  <IndexList 
+    @toArticleDetail="toArticleDetail"
+  />
 </template>
 
 <script lang="ts">
@@ -10,5 +12,9 @@ import IndexList from "@/components/Index/IndexList.vue";
     IndexList
   }
 })
-export default class HelloWorld extends Vue {}
+export default class HelloWorld extends Vue {
+  private toArticleDetail(name: string,id:string) {
+    this.$emit("toArticleDetail",name,id)
+  }
+}
 </script>

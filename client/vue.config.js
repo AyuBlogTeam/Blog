@@ -15,4 +15,9 @@ module.exports = {
   devServer: {
     proxy: 'http://localhost:8081/'
   },
+  configureWebpack: config => {
+    config.externals = {
+      IPserver: "IPserver"
+    }
+  }
 }

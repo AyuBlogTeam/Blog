@@ -16,10 +16,10 @@
       <div><span class="iconfont icon-mulu"></span>目录</div>
       <ul>
         <li
-          v-for="(item,index) in 10"
-          :key="index"
+          v-for="(item) in list"
+          :key="item.articalid"
         >
-          <a>React实战</a></li>
+          <a @click="toArticleDetail(item.title,item.articalid)">{{item.title}}</a></li>
       </ul>
     </div>
   </div>
@@ -27,7 +27,19 @@
 <script lang='ts'>
 import { Component, Vue } from "vue-property-decorator";
 @Component
-export default class componentName extends Vue {}
+export default class componentName extends Vue {
+  private list:object[] = [];
+
+  mounted(){
+    this.$http.get("http://localhost:8081/articals/getArticalList.php").then((res:object[])=>{
+      this.list = res
+    })
+  }
+
+  private toArticleDetail(name: string,id:string) {
+    this.$emit("toArticleDetail",name,id)
+  }
+}
 </script>
 
 <style lang="stylus" scoped>

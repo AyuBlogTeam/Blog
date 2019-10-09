@@ -3,10 +3,14 @@
     <Header :progressWidth="progress" />
     <main class="main">
       <div class="w70">
-        <router-view />
+        <router-view 
+          @toArticleDetail="toArticleDetail"
+        />
       </div>
       <div class="infoCard">
-        <IndexUserInfo />
+        <IndexUserInfo 
+          @toArticleDetail="toArticleDetail"
+        />
       </div>
       <div class="clear"></div>
     </main>
@@ -42,6 +46,16 @@ export default class App extends Vue {
     const scrollHeight: number = document.documentElement.scrollTop;
     const clientHeight: number = document.documentElement.clientHeight;
     this.progress = (scrollHeight / (allHeight - clientHeight)) * 100;
+  }
+
+  private toArticleDetail(name: string,id:string) {
+    this.$router.push({
+      name:`article`,
+      params:{
+        id:name,
+        queryId:id
+      }
+    });
   }
 }
 </script>
