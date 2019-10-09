@@ -24,7 +24,7 @@ class Write extends Component {
             articalTitle:"",
             articalSummary:"",
             articalKind:"React",
-            selectList:["React","Vue","Angular","PHP","Java","Python","Javascript","CSS","杂七杂八"]
+            selectList:["React","Vue","Angular","PHP","Java","Python","Javascript","CSS","TypeScript","杂七杂八"]
          }
     }
 

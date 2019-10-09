@@ -1,22 +1,18 @@
 <template>
-  <div>
-    <div v-html="content"></div>
-  </div>
+  <div
+    v-html="content"
+    class="content"
+  ></div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import IndexList from "@/components/Index/IndexList.vue";
-@Component({
-  components: {
-    IndexList
-  }
-})
+@Component
 export default class HelloWorld extends Vue {
   private content: string = "";
 
   mounted() {
-    document.documentElement.scrollTop = 0
+    document.documentElement.scrollTop = 0;
     this.getArtical(this.$route.params.queryId);
   }
 
@@ -31,3 +27,10 @@ export default class HelloWorld extends Vue {
   }
 }
 </script>
+<style lang="stylus" scoped>
+.content {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+</style>
