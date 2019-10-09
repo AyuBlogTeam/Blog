@@ -1,7 +1,9 @@
 <?php
     $file = $_FILES["file"];
+    echo $file["name"];
     //图片文件的生成
     $savename = date('YmdHis',time()).mt_rand(0,9999).'.jpeg';//localResizeIMG压缩后的图片都是jpeg格式
+    
     //生成文件夹
     $imgdirs = "/upload/image/".date('Y-m-d',time()).'/';
     mkdirs(dirname(__FILE__).$imgdirs);
@@ -25,4 +27,5 @@
         if (!mkdirs(dirname($dir), $mode)) return FALSE;
         return @mkdir($dir, $mode);
     }
+
 ?>

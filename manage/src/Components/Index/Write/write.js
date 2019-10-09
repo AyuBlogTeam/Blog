@@ -23,7 +23,8 @@ class Write extends Component {
             fileList: [],
             articalTitle:"",
             articalSummary:"",
-            articalKind:"React"
+            articalKind:"React",
+            selectList:["React","Vue","Angular","PHP","Java","Python","Javascript","CSS","杂七杂八"]
          }
     }
 
@@ -53,7 +54,7 @@ class Write extends Component {
         this.editor = editor
 
         editor.customConfig.zIndex = 100
-        editor.customConfig.uploadImgServer = "http://localhost:8081/uploadImg.php"
+        editor.customConfig.uploadImgServer = IPserver + "articals/uploadImg.php"
         editor.customConfig.uploadFileName = "file";//文件名称  也就是你在后台接受的 参数值
         editor.customConfig.uploadImgMaxLength = 1  // 限制一次最多上传 1 张图片
         editor.customConfig.uploadImgShowBase64 = false   // 使用 base64 保存图片

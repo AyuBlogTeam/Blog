@@ -1,6 +1,6 @@
 import React, { Component,Fragment } from 'react';
 import { Button,Input,Upload,Modal,Icon,Select } from 'antd'
-
+import IPserver from 'IPserver';
 class IndexUi extends Component {
     constructor(props) {
         super(props);
@@ -9,13 +9,18 @@ class IndexUi extends Component {
     
     render() { 
         const props = this.props
-        const { previewVisible, previewImage, fileList, articalTitle, articalSummary,articalKind } = props.state;
+        const { previewVisible, previewImage, fileList, articalTitle, articalSummary,articalKind,selectList } = props.state;
         const uploadButton = (
           <div>
             <Icon type="plus" />
             <div className="ant-upload-text">上传封面</div>
           </div>
         );
+        const list = selectList.map((item,index)=>{
+          return (
+            <Select.Option value={item} key={index}>{item}</Select.Option>
+          )
+        })
         return ( 
             <Fragment>
                 <div className="input">
@@ -34,7 +39,7 @@ class IndexUi extends Component {
                 </div>
                 <div className="input">
                     <Upload
-                        action="http://localhost:8081/uploadImg.php"
+                        action={IPserver + "articals/uploadImg.php"}
                         listType="picture-card"
                         fileList={fileList}
                         onPreview={props.handlePreview}
@@ -49,9 +54,7 @@ class IndexUi extends Component {
                 <div className="input" ref={r=>this.editorElem = r} style={{ textAlign: 'left' }} />
                 <div className="input">
                 <Select defaultValue={articalKind} style={{ width: 200 }} onChange={props.changeKind}>
-                    <Select.Option value="React">React</Select.Option>
-                    <Select.Option value="Vue">Vue</Select.Option>
-                    <Select.Option value="Angular">Angular</Select.Option>
+                    {list}
                 </Select>
                 </div>
                 <Button className="submit" type="primary" onClick={this.props.submit}>发布</Button>
