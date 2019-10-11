@@ -27,7 +27,7 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class IndexList extends Vue {
   private articleList:object[] = []
@@ -36,16 +36,16 @@ export default class IndexList extends Vue {
     this.getArtical()
   }
 
+  private toArticleDetail(name: string,id:string) {
+    this.$emit("toArticleDetail",name,id)
+  }
+
   private getArtical(){
-    this.$http.get("http://localhost:8081/articals/getArtical.php").then(((res:object[])=>{
+    this.$http.get("http://localhost:8081/articals/getArtical.php").then((res:object[])=>{
       if(res){
         this.articleList = res
       }
-    }))
-  }
-
-  private toArticleDetail(name: string,id:string) {
-    this.$emit("toArticleDetail",name,id)
+    })
   }
 }
 </script>

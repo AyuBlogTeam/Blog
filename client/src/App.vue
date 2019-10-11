@@ -31,13 +31,6 @@ export default class App extends Vue {
   private progress: number = 0;
 
   mounted() {
-    //获取ip
-    axios.get("http://pv.sohu.com/cityjson?ie=utf-8").then((res)=>{
-      let data = JSON.parse(res.data.slice(res.data.indexOf("=")+1,res.data.length-1))
-      console.log(data.cip)
-      console.log(data.cname)
-      console.log(data.cid)
-    })
     document.addEventListener("scroll", this.scroll);
   }
 
@@ -49,13 +42,22 @@ export default class App extends Vue {
   }
 
   private toArticleDetail(name: string,id:string) {
+    if(this.$route.params.id == id){
+      return
+    }
     this.$router.push({
       name:`article`,
       params:{
-        id:name,
-        queryId:id
+        id:id
       }
     });
+  }
+
+  private getIp(){
+    //获取ip
+    axios.get("http://pv.sohu.com/cityjson?ie=utf-8").then((res)=>{
+      let data = JSON.parse(res.data.slice(res.data.indexOf("=")+1,res.data.length-1)) //IP
+    })
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <section class="allHeader">
     <header class="wrap">
-      <h1><span class="iconfont icon-yu"></span>Ayu</h1>
+      <h1 style="cursor:pointer" @click="toIndex"><span class="iconfont icon-yu"></span>Ayu</h1>
       <div
         class="bar"
         v-for="(item,index) in menu"
@@ -24,6 +24,15 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class Header extends Vue {
   private menu: string[] = [];
+
+  private toIndex(){
+    if(this.$route.name == "home"){
+      return
+    }
+    this.$router.push({
+      name:`home`
+    });
+  }
 
   @Prop()
   progressWidth: number = 0;

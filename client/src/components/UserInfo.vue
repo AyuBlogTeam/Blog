@@ -16,7 +16,7 @@
       <div><span class="iconfont icon-mulu"></span>目录</div>
       <ul>
         <li
-          v-for="(item) in list"
+          v-for="(item) in articleList"
           :key="item.articalid"
         >
           <a @click="toArticleDetail(item.title,item.articalid)">{{item.title}}</a></li>
@@ -28,17 +28,24 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class componentName extends Vue {
-  private list:object[] = [];
+  private articleList:object[] = []
 
   mounted(){
-    this.$http.get("http://localhost:8081/articals/getArticalList.php").then((res:object[])=>{
-      this.list = res
-    })
+    this.getArtical()
   }
 
   private toArticleDetail(name: string,id:string) {
     this.$emit("toArticleDetail",name,id)
   }
+
+  private getArtical(){
+    this.$http.get("http://localhost:8081/articals/getArticalList.php").then((res:object[])=>{
+      if(res){
+        this.articleList = res
+      }
+    })
+  }
+
 }
 </script>
 

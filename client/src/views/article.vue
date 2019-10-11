@@ -6,14 +6,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 @Component
 export default class HelloWorld extends Vue {
   private content: string = "";
 
   mounted() {
     document.documentElement.scrollTop = 0;
-    this.getArtical(this.$route.params.queryId);
+    this.getArtical(this.$route.params.id);
   }
 
   private getArtical(id: string) {
@@ -25,9 +25,24 @@ export default class HelloWorld extends Vue {
         this.content = res.content;
       });
   }
+
+  @Watch("$route")
+  routeChange() {
+    this.getArtical(this.$route.params.id);
+  }
 }
 </script>
 <style lang="stylus" scoped>
+.content >>> blockquote {
+  display: block;
+  border-left: 8px solid #d0e5f2;
+  padding: 5px 10px;
+  margin: 10px 0;
+  line-height: 1.4;
+  font-size: 100%;
+  background-color: #f1f1f1;
+}
+
 .content {
   background: #fff;
   padding: 20px;

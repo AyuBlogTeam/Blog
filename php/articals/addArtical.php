@@ -8,7 +8,7 @@ $coverimg = $post['coverImg'];
 $content = htmlspecialchars($post['content'],ENT_QUOTES);
 $editname = $post['username'];
 $kind = $post['kind'];
-$articalid=uniqid("artical",true);
+$articalid=md5(uniqid("artical",true));
 
 $sql = "INSERT INTO artical (title,summary,coverimg,content,editname,kind,articalid) VALUES ('$title','$summary','$coverimg','$content','$editname','$kind','$articalid')";
 
