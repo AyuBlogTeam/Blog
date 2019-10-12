@@ -18,7 +18,7 @@ export default class HelloWorld extends Vue {
 
   private getArtical(id: string) {
     this.$http
-      .get("http://localhost:8081/articals/getOneArtical.php", {
+      .get(IPserver + "articals/getOneArtical.php", {
         articalid: id
       })
       .then((res: any) => {

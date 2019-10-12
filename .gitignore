@@ -2,3 +2,5 @@
 /client/node_modules
 /manage/php/web.config
 /manage/php/upload
+/client/dist
+/manage/build

@@ -41,7 +41,7 @@ export default class IndexList extends Vue {
   }
 
   private getArtical(){
-    this.$http.get("http://localhost:8081/articals/getArtical.php").then((res:object[])=>{
+    this.$http.get(IPserver + "articals/getArtical.php").then((res:object[])=>{
       if(res){
         this.articleList = res
       }

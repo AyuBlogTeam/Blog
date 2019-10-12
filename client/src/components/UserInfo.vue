@@ -39,7 +39,7 @@ export default class componentName extends Vue {
   }
 
   private getArtical(){
-    this.$http.get("http://localhost:8081/articals/getArticalList.php").then((res:object[])=>{
+    this.$http.get(IPserver + "articals/getArticalList.php").then((res:object[])=>{
       if(res){
         this.articleList = res
       }
