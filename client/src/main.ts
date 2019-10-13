@@ -11,6 +11,7 @@ Vue.prototype.$http = {
 };
 
 import "Iconfont/iconfont.css";
+import "Iconfont/iconfont.js";
 import "Styles/reset.styl";
 import "Styles/styles.styl";
 

@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -11,7 +12,7 @@ module.exports = {
       config.resolve.alias.set('Iconfont', resolve('src/assets/Iconfont')),
       config.resolve.alias.set('Common', resolve('src/common'))
   },
-  publicPath: '/',
+  publicPath: process.env.NODE_ENV == "development"?'/':'./',
   devServer: {
     proxy: 'http://localhost:8081/'
   },

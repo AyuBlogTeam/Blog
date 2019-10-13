@@ -29,6 +29,7 @@ export default class HelloWorld extends Vue {
   @Watch("$route")
   routeChange() {
     this.getArtical(this.$route.params.id);
+    document.documentElement.scrollTop = 0;
   }
 }
 </script>

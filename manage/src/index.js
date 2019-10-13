@@ -13,8 +13,8 @@ import Login from './Components/Login/login';
 const AppRouter = () => (
     <BrowserRouter >
         <Switch>
-            <Route path="/" exact component={Index} />
-            <Route path="/login" exact component={Login} />
+            <Route path="/manage/" exact component={Index} />
+            <Route path="/manage/login" exact component={Login} />
         </Switch>
     </BrowserRouter >
 );

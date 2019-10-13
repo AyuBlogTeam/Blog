@@ -1,20 +1,20 @@
 <template>
   <section class="allHeader">
     <header class="wrap">
-      <h1 style="cursor:pointer" @click="toIndex"><span class="iconfont icon-yu"></span>Ayu</h1>
-      <div
-        class="bar"
-        v-for="(item,index) in menu"
-        :key="index"
-      >
+      <h1 style="cursor:pointer" @click="toIndex">
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-yu1" />
+          </svg>
+        </span>
+        <span>Ayu</span>
+      </h1>
+      <div class="bar" v-for="(item,index) in menu" :key="index">
         <strong>{{item}}</strong>
         <em>{{item}}</em>
       </div>
     </header>
-    <div
-      class="progress"
-      :style="'width:' + progressWidth + '%'"
-    ></div>
+    <div class="progress" :style="'width:' + progressWidth + '%'"></div>
   </section>
 </template>
 
@@ -25,12 +25,12 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 export default class Header extends Vue {
   private menu: string[] = [];
 
-  private toIndex(){
-    if(this.$route.name == "home"){
-      return
+  private toIndex() {
+    if (this.$route.name == "home") {
+      return;
     }
     this.$router.push({
-      name:`home`
+      name: `home`
     });
   }
 
@@ -60,6 +60,21 @@ strong, em {
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    h1 {
+      span{
+        display: inline-block;
+        float: left;
+      }
+      span:nth-child(2){
+        line-height :46px;
+      }
+
+      .icon {
+        width: 40px;
+        height: 40px;
+      }
+    }
   }
 
   .bar {

@@ -13,24 +13,46 @@
       </div>
     </div>
     <div class="articleList">
-      <div><span class="iconfont icon-mulu"></span>目录</div>
+      <div class="title">
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-mulu1" />
+          </svg>
+        </span>
+        <span>目录</span>
+        <div class="clear"></div>
+      </div>
       <ul>
         <li
           v-for="(item) in articleList"
           :key="item.articalid"
         >
-          <a @click="toArticleDetail(item.title,item.articalid)">{{item.title}}</a></li>
+          <a @click="toArticleDetail(item.title,item.articalid)">{{item.title | maxStrLen}}</a></li>
       </ul>
+    </div>
+    <div class="time">
+
     </div>
   </div>
 </template>
 <script lang='ts'>
 import { Component, Vue } from "vue-property-decorator";
-@Component
+@Component({
+  filters:{
+    maxStrLen: (item:string)=> {
+      if(item && item.length > 20) {
+        return item.substr(0, 30) + "...";
+      } else {
+        return item
+      }
+    }
+  }
+})
 export default class componentName extends Vue {
   private articleList:object[] = []
 
   mounted(){
+    console.log((new Date().getTime() - new Date("2016-02-19").getTime())/86400000)
     this.getArtical()
   }
 
@@ -116,6 +138,20 @@ export default class componentName extends Vue {
     background-color: #FFF;
     margin-top: 20px;
     padding: 20px;
+
+    .title{
+      span{
+        display: inline-block;
+        float: left;
+      }
+      span:nth-child(2){
+        line-height :30px;
+      }
+      .icon{
+        width: 30px;
+        height:30px;
+      }
+    }
 
     ul {
       padding-left: 20px;
