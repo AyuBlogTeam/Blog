@@ -15,6 +15,7 @@ import "Iconfont/iconfont.js";
 import "Styles/reset.styl";
 import "Styles/styles.styl";
 
+
 new Vue({
   router,
   store,

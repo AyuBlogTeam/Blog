@@ -1,20 +1,30 @@
 <template>
   <section class="allHeader">
     <header class="wrap">
-      <h1 style="cursor:pointer" @click="toIndex">
+      <div @click="toIndex">
         <span>
-          <svg class="icon" aria-hidden="true">
+          <svg
+            class="icon"
+            aria-hidden="true"
+          >
             <use xlink:href="#icon-yu1" />
           </svg>
         </span>
         <span>Ayu</span>
-      </h1>
-      <div class="bar" v-for="(item,index) in menu" :key="index">
+      </div>
+      <div
+        class="bar"
+        v-for="(item,index) in menu"
+        :key="index"
+      >
         <strong>{{item}}</strong>
         <em>{{item}}</em>
       </div>
     </header>
-    <div class="progress" :style="'width:' + progressWidth + '%'"></div>
+    <div
+      class="progress"
+      :style="'width:' + progressWidth + '%'"
+    ></div>
   </section>
 </template>
 
@@ -30,7 +40,7 @@ export default class Header extends Vue {
       return;
     }
     this.$router.push({
-      name: `home`
+      name: `homePage`
     });
   }
 
@@ -57,17 +67,20 @@ strong, em {
     width: 1024px;
     margin: 0 auto;
     background: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    overflow: hidden;
 
-    h1 {
-      span{
+    div {
+      cursor: pointer;
+      overflow: hidden;
+      float: left;
+
+      span {
         display: inline-block;
         float: left;
       }
-      span:nth-child(2){
-        line-height :46px;
+
+      span:nth-child(2) {
+        line-height: 46px;
       }
 
       .icon {

@@ -14,7 +14,7 @@ class Artical{
 
 $articalid=$_GET["articalid"];
 
-$sql = "SELECT * FROM artical WHERE articalid='$articalid'";
+$sql = "SELECT * FROM ARTICAL WHERE articalid='$articalid'";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {

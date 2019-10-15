@@ -6,7 +6,7 @@
       public $articalid;
   }
 
-  $sql = "SELECT title,articalid FROM artical order by id desc limit 0,10";
+  $sql = "SELECT title,articalid FROM ARTICAL order by id desc limit 0,10";
 
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {

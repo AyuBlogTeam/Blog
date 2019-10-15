@@ -15,7 +15,10 @@
     <div class="articleList">
       <div class="title">
         <span>
-          <svg class="icon" aria-hidden="true">
+          <svg
+            class="icon"
+            aria-hidden="true"
+          >
             <use xlink:href="#icon-mulu1" />
           </svg>
         </span>
@@ -38,36 +41,37 @@
 <script lang='ts'>
 import { Component, Vue } from "vue-property-decorator";
 @Component({
-  filters:{
-    maxStrLen: (item:string)=> {
-      if(item && item.length > 20) {
+  filters: {
+    maxStrLen: (item: string) => {
+      if (item && item.length > 20) {
         return item.substr(0, 30) + "...";
       } else {
-        return item
+        return item;
       }
     }
   }
 })
 export default class componentName extends Vue {
-  private articleList:object[] = []
+  private articleList: object[] = [];
 
-  mounted(){
-    console.log((new Date().getTime() - new Date("2016-02-19").getTime())/86400000)
-    this.getArtical()
+  mounted() {
+    // console.log((new Date().getTime() - new Date("2016-02-19").getTime())/86400000)
+    this.getArtical();
   }
 
-  private toArticleDetail(name: string,id:string) {
-    this.$emit("toArticleDetail",name,id)
+  private toArticleDetail(name: string, id: string) {
+    this.$emit("toArticleDetail", name, id);
   }
 
-  private getArtical(){
-    this.$http.get(IPserver + "articals/getArticalList.php").then((res:object[])=>{
-      if(res){
-        this.articleList = res
-      }
-    })
+  private getArtical() {
+    this.$http
+      .get(IPserver + "articals/getArticalList.php")
+      .then((res: object[]) => {
+        if (res) {
+          this.articleList = res;
+        }
+      });
   }
-
 }
 </script>
 
@@ -133,23 +137,25 @@ export default class componentName extends Vue {
 
   .articleList {
     position: sticky;
-    top: 90px;
+    top: 50px;
     border-radius: 10px;
     background-color: #FFF;
     margin-top: 20px;
     padding: 20px;
 
-    .title{
-      span{
+    .title {
+      span {
         display: inline-block;
         float: left;
       }
-      span:nth-child(2){
-        line-height :30px;
+
+      span:nth-child(2) {
+        line-height: 30px;
       }
-      .icon{
+
+      .icon {
         width: 30px;
-        height:30px;
+        height: 30px;
       }
     }
 

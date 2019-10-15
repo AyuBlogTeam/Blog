@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-const Home = () => import("@/views/index.vue");
-const ArticleDetails = () => import("@/views/article.vue");
+const Article = () => import("@/views/articleList.vue");
+const ArticleDetails = () => import("@/views/articleDetail.vue");
+const HomePage = () => import("@/views/index.vue");
 
 Vue.use(Router);
 
@@ -11,12 +12,17 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "homePage",
+      component: HomePage
+    },
+    {
+      path: "/article",
+      name: "article",
+      component: Article
     },
     {
       path: "/article/:id",
-      name: "article",
+      name: "articleDetails",
       component: ArticleDetails
     }
   ]

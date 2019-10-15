@@ -11,7 +11,7 @@
       public $time;
   }
 
-  $sql = "SELECT id,title,summary,coverimg,kind,articalid,sendtime FROM artical order by id DESC";
+  $sql = "SELECT id,title,summary,coverimg,kind,articalid,sendtime FROM ARTICAL order by id DESC";
 
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {

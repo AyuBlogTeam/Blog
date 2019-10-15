@@ -10,7 +10,7 @@ $editname = $post['username'];
 $kind = $post['kind'];
 $articalid=md5(uniqid("artical",true));
 
-$sql = "INSERT INTO artical (title,summary,coverimg,content,editname,kind,articalid) VALUES ('$title','$summary','$coverimg','$content','$editname','$kind','$articalid')";
+$sql = "INSERT INTO ARTICAL (title,summary,coverimg,content,editname,kind,articalid) VALUES ('$title','$summary','$coverimg','$content','$editname','$kind','$articalid')";
 
 $result = $conn->query($sql);
 if($result){
