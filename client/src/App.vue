@@ -35,15 +35,5 @@ export default class App extends Vue {
 }
 </script>
 <style scoped lang="stylus">
-@media (min-width: 1440px) {
-  .main {
-    max-width: 1232px;
-  }
-}
 
-@media (max-width: 1439px) and (min-width: 1024px) {
-  .main {
-    max-width: 1024px;
-  }
-}
 </style>

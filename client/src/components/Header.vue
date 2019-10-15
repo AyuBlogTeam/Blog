@@ -1,30 +1,26 @@
 <template>
-  <section class="allHeader">
+  <section class="allHeader" :class="current!=0?'inHeader':''">
     <header class="wrap">
-      <div @click="toIndex">
+      <div @click="toRotate(0)">
         <span>
-          <svg
-            class="icon"
-            aria-hidden="true"
-          >
+          <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-yu1" />
           </svg>
         </span>
         <span>Ayu</span>
       </div>
-      <div
-        class="bar"
-        v-for="(item,index) in menu"
-        :key="index"
-      >
+      <ul class="banner">
+        <li :class="current==0?'active':''" @click="toRotate(0)">首页</li>
+        <li :class="current==1?'active':''" @click="toRotate(1)">文章</li>
+        <li :class="current==2?'active':''" @click="toRotate(2)">生活</li>
+      </ul>
+      <a>反馈</a>
+      <div class="bar" v-for="(item,index) in menu" :key="index">
         <strong>{{item}}</strong>
         <em>{{item}}</em>
       </div>
     </header>
-    <div
-      class="progress"
-      :style="'width:' + progressWidth + '%'"
-    ></div>
+    <div class="progress" :style="'width:' + progressWidth + '%'"></div>
   </section>
 </template>
 
@@ -33,15 +29,48 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class Header extends Vue {
+  private current:number = 0;
   private menu: string[] = [];
 
-  private toIndex() {
-    if (this.$route.name == "home") {
-      return;
+  mounted(){
+    const pname = window.location.pathname
+    if(pname.indexOf("/article") != -1){
+      this.current = 1;
+    }else{
+      this.current = 0;
     }
-    this.$router.push({
-      name: `homePage`
-    });
+  }
+
+  private toRotate(index:number) {
+    this.current = index;
+    switch(index){
+      case 0:
+        if (this.$route.name == "homePage") {
+          return;
+        }
+        this.$router.push({
+          name: `homePage`
+        });
+        break;
+      case 1:
+        if (this.$route.name == "article") {
+          return;
+        }
+        this.$router.push({
+          name: `article`
+        });
+        break;
+      case 2:
+        if (this.$route.name == "article") {
+          return;
+        }
+        this.$router.push({
+          name: `article`
+        });
+        break;
+      default:
+        break;
+    }
   }
 
   @Prop()
@@ -56,23 +85,52 @@ strong, em {
 
 .allHeader {
   position: sticky;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
   top: 0;
-  background-color: white;
   box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   margin-bottom: 10px;
   overflow: hidden;
   z-index: 1986;
+  height: 57px;
 
   .wrap {
     width: 1024px;
     margin: 0 auto;
-    background: white;
     overflow: hidden;
+
+    .banner {
+      float: left;
+      overflow: hidden;
+
+      li {
+        float: left;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0 20px;
+        transition :color .5s
+      }
+
+      li:hover{
+        color:rgb(200,200,109);
+      }
+
+      li.active{
+        color:rgb(200,200,109);
+      }
+    }
+
+    a{
+      color: #fff;
+      line-height: 57px;
+      float: right;
+    }
 
     div {
       cursor: pointer;
       overflow: hidden;
       float: left;
+      margin-top: 5px;
 
       span {
         display: inline-block;
@@ -110,5 +168,10 @@ strong, em {
     font-size: 24px;
     margin-right: 10px;
   }
+}
+
+.inHeader{
+  background: #fff;
+  color: #000;
 }
 </style>

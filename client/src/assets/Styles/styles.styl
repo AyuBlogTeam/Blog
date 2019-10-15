@@ -11,10 +11,25 @@ body
   font-size: 14px
 .w70 
   width 70%
-.main 
+.main
   margin 0 auto
-  display flex
-
 .infoCard 
   flex 1
   margin-left 1%
+@media (min-width: 1440px) {
+  .main {
+    width: 1232px;
+  }
+  .allHeader .wrap{
+    width: 1232px;
+  }
+}
+
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .main {
+    width: 1024px;
+  }
+  .allHeader .wrap{
+    width: 1024px;
+  }
+}

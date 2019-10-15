@@ -74,4 +74,6 @@ export default class HelloWorld extends Vue {
   padding: 20px;
   margin-bottom: 20px;
 }
+.main 
+  display flex
 </style>

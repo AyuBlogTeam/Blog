@@ -51,11 +51,10 @@ import { Component, Vue } from "vue-property-decorator";
     }
   }
 })
-export default class componentName extends Vue {
+export default class UserInfo extends Vue {
   private articleList: object[] = [];
 
   mounted() {
-    // console.log((new Date().getTime() - new Date("2016-02-19").getTime())/86400000)
     this.getArtical();
   }
 
@@ -137,7 +136,7 @@ export default class componentName extends Vue {
 
   .articleList {
     position: sticky;
-    top: 50px;
+    top: 70px;
     border-radius: 10px;
     background-color: #FFF;
     margin-top: 20px;

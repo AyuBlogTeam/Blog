@@ -35,4 +35,7 @@ export default class Index extends Vue {
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.main 
+  display flex
+</style>

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-const Article = () => import("@/views/articleList.vue");
+const Article = () => import("@/views/article.vue");
 const ArticleDetails = () => import("@/views/articleDetail.vue");
 const HomePage = () => import("@/views/index.vue");
 

@@ -1,10 +1,47 @@
 <template>
   <div>
     <div class="bg"></div>
+    <div class="main">
+      <div>
+        <h1>深海之鱼</h1>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="该网站还在开发哦，程序猿小哥哥非常乐意接收你们的意见哦~" />
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-sousuo" />
+        </svg>
+      </div>
+      <div class="poetry">
+        <h2>《素年锦时》</h2>
+        <p>安妮宝贝</p>
+        <p>白茶清欢无别事,我在等风也等你。</p>
+        <p>苦酒折柳今相离,无风无月也无你。</p>
+      </div>
+      <div class="time">
+        <h1>{{time}}</h1>
+      </div>
+      <div class="username">
+        <h1>{{username}}</h1>
+      </div>
+    </div>
   </div>
 </template>
-<script>
-export default {};
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+@Component
+export default class Index extends Vue {
+  private time: string = "";
+  private username: string = "AYUPERSON.TOP";
+
+  mounted() {
+    this.time = (
+      (new Date().getTime() - new Date("2016-02-19").getTime()) /
+      86400000
+    )
+      .toFixed()
+      .toString();
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -16,6 +53,56 @@ export default {};
   position: fixed;
   top: 0px;
   left: 0px;
-  background-size: cover;
+  z-index: -1;
+  background-position: center;
+}
+
+.main {
+  text-align: center;
+
+  h1 {
+    line-height: 100px;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 30px;
+    color: rgb(131, 175, 155);
+  }
+
+  .search {
+    width: 50%;
+    height: 36px;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+
+    input {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #fff;
+      border: none;
+      outline: none;
+      padding: 0 0 0 10px;
+    }
+
+    svg {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      right: 0px;
+      top: 3px;
+    }
+  }
+
+  .poetry {
+    color: #fff;
+  }
+
+  .username{
+    h1{
+      letter-spacing :0px
+    }
+  }
 }
 </style>
