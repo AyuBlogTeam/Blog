@@ -12,7 +12,8 @@ module.exports = {
       config.resolve.alias.set('Iconfont', resolve('src/assets/Iconfont')),
       config.resolve.alias.set('Common', resolve('src/common'))
   },
-  publicPath: process.env.NODE_ENV == "development"?'/':'./',
+  // publicPath: process.env.NODE_ENV == "development"?'/':'./',
+  publicPath: './',
   devServer: {
     proxy: 'http://localhost:8081/'
   },

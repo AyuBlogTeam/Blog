@@ -85,4 +85,5 @@ export default class App extends Vue {
   }
 }
 </script>
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus">
+</style>
