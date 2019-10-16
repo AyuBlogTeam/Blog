@@ -30,22 +30,26 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class IndexList extends Vue {
-  private articleList:object[] = []
+  private articleList: object[] = [];
 
-  mounted(){
-    this.getArtical()
+  mounted() {
+    this.getArtical();
   }
 
-  private toArticleDetail(name: string,id:string) {
-    this.$emit("toArticleDetail",name,id)
+  private toArticleDetail(name: string, id: string) {
+    this.$emit("toArticleDetail", name, id);
   }
 
-  private getArtical(){
-    this.$http.get(IPserver + "articals/getArtical.php").then((res:object[])=>{
-      if(res){
-        this.articleList = res
-      }
-    })
+  private getArtical() {
+    this.$emit("showLoading", true);
+    this.$http
+      .get(IPserver + "articals/getArtical.php")
+      .then((res: object[]) => {
+        if (res) {
+          this.$emit("showLoading", false);
+          this.articleList = res;
+        }
+      });
   }
 }
 </script>

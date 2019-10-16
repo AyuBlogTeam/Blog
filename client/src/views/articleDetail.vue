@@ -42,12 +42,16 @@ export default class HelloWorld extends Vue {
   }
 
   private getArtical(id: string) {
+    this.$emit("showLoading", true);
     this.$http
       .get(IPserver + "articals/getOneArtical.php", {
         articalid: id
       })
       .then((res: any) => {
-        this.content = res.content;
+        if (res) {
+          this.$emit("showLoading", false);
+          this.content = res.content;
+        }
       });
   }
 
@@ -74,6 +78,8 @@ export default class HelloWorld extends Vue {
   padding: 20px;
   margin-bottom: 20px;
 }
-.main 
-  display flex
+
+.main {
+  display: flex;
+}
 </style>

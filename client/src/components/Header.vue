@@ -1,26 +1,48 @@
 <template>
-  <section class="allHeader" :class="current!=0?'inHeader':''">
+  <section
+    class="allHeader"
+    :class="current!=0?'inHeader':''"
+  >
     <header class="wrap">
       <div @click="toRotate(0)">
         <span>
-          <svg class="icon" aria-hidden="true">
+          <svg
+            class="icon"
+            aria-hidden="true"
+          >
             <use xlink:href="#icon-yu1" />
           </svg>
         </span>
         <span>Ayu</span>
       </div>
       <ul class="banner">
-        <li :class="current==0?'active':''" @click="toRotate(0)">首页</li>
-        <li :class="current==1?'active':''" @click="toRotate(1)">文章</li>
-        <li :class="current==2?'active':''" @click="toRotate(2)">生活</li>
+        <li
+          :class="current==0?'active':''"
+          @click="toRotate(0)"
+        >首页</li>
+        <li
+          :class="current==1?'active':''"
+          @click="toRotate(1)"
+        >文章</li>
+        <li
+          :class="current==2?'active':''"
+          @click="toRotate(2)"
+        >生活</li>
       </ul>
       <a>反馈</a>
-      <div class="bar" v-for="(item,index) in menu" :key="index">
+      <div
+        class="bar"
+        v-for="(item,index) in menu"
+        :key="index"
+      >
         <strong>{{item}}</strong>
         <em>{{item}}</em>
       </div>
     </header>
-    <div class="progress" :style="'width:' + progressWidth + '%'"></div>
+    <div
+      class="progress"
+      :style="'width:' + progressWidth + '%'"
+    ></div>
   </section>
 </template>
 
@@ -29,21 +51,21 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class Header extends Vue {
-  private current:number = 0;
+  private current: number = 0;
   private menu: string[] = [];
 
-  mounted(){
-    const pname = window.location.pathname
-    if(pname.indexOf("/article") != -1){
+  mounted() {
+    const pname = window.location.pathname;
+    if (pname.indexOf("/article") != -1) {
       this.current = 1;
-    }else{
+    } else {
       this.current = 0;
     }
   }
 
-  private toRotate(index:number) {
+  private toRotate(index: number) {
     this.current = index;
-    switch(index){
+    switch (index) {
       case 0:
         if (this.$route.name == "homePage") {
           return;
@@ -108,20 +130,19 @@ strong, em {
         font-size: 16px;
         cursor: pointer;
         padding: 0 20px;
-        transition :color .5s
+        transition: color 0.5s;
       }
 
-      li:hover{
-        color:rgb(200,200,109);
+      li:hover {
+        color: rgb(200, 200, 109);
       }
 
-      li.active{
-        color:rgb(200,200,109);
+      li.active {
+        color: rgb(200, 200, 109);
       }
     }
 
-    a{
-      color: #fff;
+    a {
       line-height: 57px;
       float: right;
     }
@@ -170,7 +191,7 @@ strong, em {
   }
 }
 
-.inHeader{
+.inHeader {
   background: #fff;
   color: #000;
 }

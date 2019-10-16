@@ -1,7 +1,10 @@
 <template>
   <main class="main">
     <div class="w70">
-      <ArticleList @toArticleDetail="toArticleDetail" />
+      <ArticleList
+        @showLoading="showLoading"
+        @toArticleDetail="toArticleDetail"
+      />
     </div>
     <div class="infoCard">
       <IndexUserInfo @toArticleDetail="toArticleDetail" />
@@ -12,7 +15,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import ArticleList from "@/components/articleList.vue";
+import ArticleList from "@/components/ArticleList.vue";
 import IndexUserInfo from "@/components/UserInfo.vue";
 @Component({
   components: {
@@ -32,10 +35,15 @@ export default class Index extends Vue {
       }
     });
   }
+
+  private showLoading(boo) {
+    this.$emit("showLoading", boo);
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-.main 
-  display flex
+.main {
+  display: flex;
+}
 </style>
