@@ -53,7 +53,32 @@ export default class App extends Vue {
 
   created() {
     setTimeout(() => {
-      window.L2Dwidget.init({
+      window.L2Dwidget.on('*',(name)=>{
+        console.log(name)
+      }).init({
+        dialog:{
+          enable:true,
+          script: {
+              mouseover:[
+                {
+                  selector:"#live2d-widget #live2dcanvas",
+                  text:[
+                    "干嘛呢你，快把手拿开～～",
+                    "鼠…鼠标放错地方了！",
+                    "你要干嘛呀？",
+                    "喵喵喵？",
+                    "怕怕(ノ≧∇≦)ノ",
+                    "非礼呀！救命！",
+                    "这样的话，只能使用武力了！",
+                    "我要生气了哦",
+                    "不要动手动脚的！",
+                    "真…真的是不知羞耻！",
+                    "Hentai！"
+                  ]
+                }
+              ]
+            }
+        },
         pluginRootPath: "/live2dw/",
         pluginJsPath: "lib/",
         pluginModelPath: "live2d-widget-model-miku/assets/",
