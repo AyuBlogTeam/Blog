@@ -21,9 +21,52 @@ export default class App extends Vue {
   private loading: boolean = false;
   private progress: number = 0;
 
+  private list: string[] = [
+    "chitose",
+    "epsilon2_1",
+    "gf",
+    "haru_1",
+    "haru_2",
+    "haruto",
+    "hibiki",
+    "hijiki",
+    "izumi",
+    "koharu",
+    "miku",
+    "ni-j",
+    "nico",
+    "nietzsche",
+    "nipsilon",
+    "nito",
+    "shizuku",
+    "tororo",
+    "tsumiki",
+    "unitychan",
+    "wanko",
+    "z16"
+  ];
+
   mounted() {
     this.getInfo();
     document.addEventListener("scroll", this.scroll);
+  }
+
+  created() {
+    setTimeout(() => {
+      window.L2Dwidget.init({
+        pluginRootPath: "/live2dw/",
+        pluginJsPath: "lib/",
+        pluginModelPath: "live2d-widget-model-miku/assets/",
+        tagMode: false,
+        debug: false,
+        model: {
+          jsonPath: "/live2dw/live2d-widget-model-miku/assets/miku.model.json"
+        },
+        display: { position: "left", width: 150, height: 300 },
+        mobile: { show: false },
+        log: false
+      });
+    }, 1000);
   }
 
   private showLoading(boo) {
