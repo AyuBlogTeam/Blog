@@ -17,6 +17,8 @@
       ul
         li(v-for="(item) in articleList",:key="item.articalid")
           a(@click="toArticleDetail(item.title,item.articalid)") {{item.title | maxStrLen}}
+            div.underline
+        div.clear
 </template>
 <script lang='ts'>
 import { Component, Vue } from "vue-property-decorator";
@@ -145,6 +147,22 @@ export default class UserInfo extends Vue {
         line-height: 30px;
         color: #1e90ff;
         font-size: 14px;
+        float: left;
+        min-width: 51%;
+
+        a {
+          transition: all 0.5s;
+        }
+      }
+
+      li:hover {
+        a {
+          color: #c8c86d;
+
+          .underline {
+            width: 100%;
+          }
+        }
       }
     }
   }

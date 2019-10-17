@@ -7,7 +7,7 @@
 <script lang='ts'>
 // 5 6 7 8 9 10 17 18 19 20 21
 // 5 7 9 10 17 20
-import custom from "Common/custom";
+// import custom from "Common/custom";
 
 import { Component, Vue } from "vue-property-decorator";
 @Component
@@ -32,7 +32,7 @@ export default class componentName extends Vue {
 </script>
 <style lang='stylus' scoped>
 #live2d {
-  position: absolute;
+  position: fixed;
   transform: scale(0.7);
   bottom: 0px;
   left: 0px;

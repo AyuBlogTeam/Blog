@@ -2,8 +2,11 @@
   div#app
     Header(:progressWidth="progress")
     router-view(@showLoading="showLoading")
-    Loader(v-if="loading")
+    Loader(v-show="loading")
     Live2d
+    div.backtop(@click="backToTop",v-if="isShowTop")
+      svg.icon(aria-hidden="true")
+          use(xlink:href="#icon-fanhuidingbu-")
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
@@ -23,6 +26,7 @@ import axios from "axios";
 export default class App extends Vue {
   private loading: boolean = false;
   private progress: number = 0;
+  private isShowTop: boolean = false;
 
   mounted() {
     this.getInfo();
@@ -37,7 +41,16 @@ export default class App extends Vue {
     const allHeight: number = document.body.clientHeight;
     const scrollHeight: number = document.documentElement.scrollTop;
     const clientHeight: number = document.documentElement.clientHeight;
+    if (scrollHeight > 200) {
+      this.isShowTop = true;
+    } else {
+      this.isShowTop = false;
+    }
     this.progress = (scrollHeight / (allHeight - clientHeight)) * 100;
+  }
+
+  private backToTop() {
+    document.documentElement.scrollTop = 0;
   }
 
   private getInfo() {
@@ -45,4 +58,16 @@ export default class App extends Vue {
   }
 }
 </script>
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus">
+.backtop {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+</style>

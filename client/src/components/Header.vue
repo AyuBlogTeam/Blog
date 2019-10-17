@@ -1,19 +1,19 @@
 <template lang="pug">
   section.allHeader(:class="current!=0?'inHeader':''")
     header.wrap
-      div(@click="toRotate(0)")
+      div.logo(@click="toRotate(0)")
         span
           svg.icon(aria-hidden="true")
             use(xlink:href="#icon-yu1")
         span Ayu
       ul.banner
         li(:class="current==0?'active':''",@click="toRotate(0)") 首页
+          div.underline
         li(:class="current==1?'active':''",@click="toRotate(1)") 文章
+          div.underline
         li(:class="current==2?'active':''",@click="toRotate(2)") 生活
+          div.underline
       a 反馈
-      div.bar(v-for="(item,index) in menu",:key="index")
-        strong {{item}}
-        em {{item}}
     div.progress(:style="'width:' + progressWidth + '%'")
 </template>
 
@@ -23,7 +23,6 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class Header extends Vue {
   private current: number = 0;
-  private menu: string[] = [];
 
   mounted() {
     const pname = window.location.pathname;
@@ -83,8 +82,8 @@ strong, em {
   top: 0;
   box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   margin-bottom: 10px;
-  overflow: hidden;
   z-index: 1986;
+  overflow: hidden;
   height: 57px;
 
   .wrap {
@@ -102,10 +101,18 @@ strong, em {
         cursor: pointer;
         padding: 0 20px;
         transition: color 0.5s;
+
+        .underline {
+          margin-top: 5px;
+        }
       }
 
       li:hover {
         color: rgb(200, 200, 109);
+
+        .underline {
+          width: 100%;
+        }
       }
 
       li.active {
@@ -118,7 +125,7 @@ strong, em {
       float: right;
     }
 
-    div {
+    .logo {
       cursor: pointer;
       overflow: hidden;
       float: left;
@@ -154,6 +161,7 @@ strong, em {
     background-color: rgba(0, 132, 255, 0.25);
     width: 0;
     height: 2px;
+    cursor: pointer;
   }
 
   .iconfont {

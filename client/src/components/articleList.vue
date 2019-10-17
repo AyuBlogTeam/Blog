@@ -2,6 +2,7 @@
   div
     div.oneArticle(v-for="item in articleList",:key="item.articalid")
       h2.title.fl(@click="toArticleDetail(item.title,item.articalid)") {{item.title}}
+        div.underline
       div.clear
       div.richContent
         div.pic
@@ -41,7 +42,18 @@ export default class IndexList extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
+.oneArticle:hover {
+  box-shadow: #ccc 1px 1px 8px;
+
+  img {
+    transform-origin: center center;
+    transform: scale(1.5);
+  }
+}
+
 .oneArticle {
+  transition: all 0.5s;
+  margin-top: 5px;
   padding: 20px;
   background-color: #fff;
   border-bottom: 1px solid #eee;
@@ -51,6 +63,15 @@ export default class IndexList extends Vue {
     margin-bottom: 15px;
     cursor: pointer;
     color: #1a1a1a;
+    transition: all 0.5s;
+  }
+
+  .title:hover {
+    color: #c8c86d;
+
+    .underline {
+      width: 100%;
+    }
   }
 
   .richContent {
@@ -69,7 +90,8 @@ export default class IndexList extends Vue {
 
       img {
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
+        transition: all 0.5s;
       }
     }
 
