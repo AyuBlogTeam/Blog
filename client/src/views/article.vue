@@ -1,16 +1,12 @@
-<template>
-  <main class="main">
-    <div class="w70">
-      <ArticleList
-        @showLoading="showLoading"
-        @toArticleDetail="toArticleDetail"
-      />
-    </div>
-    <div class="infoCard">
-      <IndexUserInfo @toArticleDetail="toArticleDetail" />
-    </div>
-    <div class="clear"></div>
-  </main>
+<template lang="pug">
+  div.main
+    div.w70
+      ArticleList(
+        @showLoading="showLoading",
+        @toArticleDetail="toArticleDetail")
+    div.infoCard
+      IndexUserInfo(@toArticleDetail="toArticleDetail")
+    div.clear
 </template>
 
 <script lang="ts">

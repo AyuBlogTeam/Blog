@@ -1,30 +1,17 @@
-<template>
-  <div>
-    <div
-      class="oneArticle"
-      v-for="item in articleList"
-      :key="item.articalid"
-    >
-      <h2
-        class="title fl"
-        @click="toArticleDetail(item.title,item.articalid)"
-      >{{item.title}}</h2>
-      <div class="clear"></div>
-      <div class="richContent">
-        <div class="pic">
-          <img :src="item.coverimg">
-        </div>
-        <div class="info">
-          <p>{{item.summary}}</p>
-        </div>
-      </div>
-      <div class="footArticle">
-        <p class="fl grey">{{item.kind}}</p>
-        <p class="fr grey">{{item.time}}</p>
-        <p class="clear"></p>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  div
+    div.oneArticle(v-for="item in articleList",:key="item.articalid")
+      h2.title.fl(@click="toArticleDetail(item.title,item.articalid)") {{item.title}}
+      div.clear
+      div.richContent
+        div.pic
+          img(:src="item.coverimg")
+        div.info
+          p {{item.summary}}
+      div.footArticle
+        p.fl.grey {{item.kind}}
+        p.fr.grey {{item.time}}
+        p.clear
 </template>
 <script lang='ts'>
 import { Component, Vue } from "vue-property-decorator";

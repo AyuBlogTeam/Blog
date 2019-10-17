@@ -1,49 +1,20 @@
-<template>
-  <section
-    class="allHeader"
-    :class="current!=0?'inHeader':''"
-  >
-    <header class="wrap">
-      <div @click="toRotate(0)">
-        <span>
-          <svg
-            class="icon"
-            aria-hidden="true"
-          >
-            <use xlink:href="#icon-yu1" />
-          </svg>
-        </span>
-        <span>Ayu</span>
-      </div>
-      <ul class="banner">
-        <li
-          :class="current==0?'active':''"
-          @click="toRotate(0)"
-        >首页</li>
-        <li
-          :class="current==1?'active':''"
-          @click="toRotate(1)"
-        >文章</li>
-        <li
-          :class="current==2?'active':''"
-          @click="toRotate(2)"
-        >生活</li>
-      </ul>
-      <a>反馈</a>
-      <div
-        class="bar"
-        v-for="(item,index) in menu"
-        :key="index"
-      >
-        <strong>{{item}}</strong>
-        <em>{{item}}</em>
-      </div>
-    </header>
-    <div
-      class="progress"
-      :style="'width:' + progressWidth + '%'"
-    ></div>
-  </section>
+<template lang="pug">
+  section.allHeader(:class="current!=0?'inHeader':''")
+    header.wrap
+      div(@click="toRotate(0)")
+        span
+          svg.icon(aria-hidden="true")
+            use(xlink:href="#icon-yu1")
+        span Ayu
+      ul.banner
+        li(:class="current==0?'active':''",@click="toRotate(0)") 首页
+        li(:class="current==1?'active':''",@click="toRotate(1)") 文章
+        li(:class="current==2?'active':''",@click="toRotate(2)") 生活
+      a 反馈
+      div.bar(v-for="(item,index) in menu",:key="index")
+        strong {{item}}
+        em {{item}}
+    div.progress(:style="'width:' + progressWidth + '%'")
 </template>
 
 <script lang="ts">

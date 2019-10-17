@@ -1,30 +1,22 @@
-<template>
-  <div>
-    <div class="bg"></div>
-    <div class="main">
-      <div>
-        <h1>深海之鱼</h1>
-      </div>
-      <div class="search">
-        <input type="text" placeholder="该网站还在开发哦，程序猿小哥哥非常乐意接收你们的意见哦~" />
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-sousuo" />
-        </svg>
-      </div>
-      <div class="poetry">
-        <h2>《素年锦时》</h2>
-        <p>安妮宝贝</p>
-        <p>白茶清欢无别事,我在等风也等你。</p>
-        <p>苦酒折柳今相离,无风无月也无你。</p>
-      </div>
-      <div class="time">
-        <h1>{{time}}</h1>
-      </div>
-      <div class="username">
-        <h1>{{username}}</h1>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  div
+    div.bg
+    div.main
+      div
+        h1 深海之鱼
+      div.search
+        input(type="text",placeholder="该网站还在开发哦，程序猿小哥哥非常乐意接收你们的意见哦~")
+        svg.icon(aria-hidden="true")
+          use(xlink:href="#icon-sousuo")
+      div.poetry
+        h2 《素年锦时》 
+        p 安妮宝贝 
+        p 白茶清欢无别事,我在等风也等你。
+        p 苦酒折柳今相离,无风无月也无你。
+      div.time
+        h1 {{time}}
+      div.username
+        h1 {{username}}
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
@@ -99,9 +91,9 @@ export default class Index extends Vue {
     color: #fff;
   }
 
-  .username{
-    h1{
-      letter-spacing :0px
+  .username {
+    h1 {
+      letter-spacing: 0px;
     }
   }
 }

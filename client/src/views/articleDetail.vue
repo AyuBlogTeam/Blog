@@ -1,16 +1,10 @@
-<template>
-  <main class="main">
-    <div class="w70">
-      <div
-        v-html="content"
-        class="content"
-      ></div>
-    </div>
-    <div class="infoCard">
-      <IndexUserInfo @toArticleDetail="toArticleDetail" />
-    </div>
-    <div class="clear"></div>
-  </main>
+<template lang="pug">
+  main.main
+    div.w70
+      div.content(v-html="content")
+    div.infoCard
+      IndexUserInfo(@toArticleDetail="toArticleDetail")
+    div.clear
 </template>
 
 <script lang="ts">

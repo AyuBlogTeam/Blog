@@ -1,23 +1,8 @@
-<template>
-  <div class="loader">
-    <div class="loader-inner">
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  div.loader
+    div.loader-inner
+      div.loader-line-wrap(v-for="(item,index) in 5" :key="index")
+        div.loader-line
 </template>
 <style lang="stylus" scoped>
 .loader {
@@ -28,7 +13,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 99999;
+  z-index: 99;
 }
 
 .loader-inner {

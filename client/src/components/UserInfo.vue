@@ -1,42 +1,22 @@
-<template>
-  <div class="card">
-    <div class="userinfo">
-      <div class="headImg">
-        <img src="~Images/fish.svg">
-      </div>
-      <div class="infoUsername">Ayu</div>
-      <div class="infoDesc">
-        前端爱好者
-      </div>
-      <div class="github">
-        <span class="iconfont icon-git"></span>
-      </div>
-    </div>
-    <div class="articleList">
-      <div class="title">
-        <span>
-          <svg
-            class="icon"
-            aria-hidden="true"
-          >
-            <use xlink:href="#icon-mulu1" />
-          </svg>
-        </span>
-        <span>目录</span>
-        <div class="clear"></div>
-      </div>
-      <ul>
-        <li
-          v-for="(item) in articleList"
-          :key="item.articalid"
-        >
-          <a @click="toArticleDetail(item.title,item.articalid)">{{item.title | maxStrLen}}</a></li>
-      </ul>
-    </div>
-    <div class="time">
-
-    </div>
-  </div>
+<template lang="pug">
+  div.card
+    div.userinfo
+      div.headImg
+        img(src="~Images/fish.svg")
+      div.infoUsername Ayu
+      div.infoDesc 前端爱好者
+      div.github
+        span.iconfont.icon-git
+    div.articleList
+      div.title
+        span
+          svg.icon(aria-hidden="true")
+            use(xlink:href="#icon-mulu1")
+        span 目录
+        div.clear
+      ul
+        li(v-for="(item) in articleList",:key="item.articalid")
+          a(@click="toArticleDetail(item.title,item.articalid)") {{item.title | maxStrLen}}
 </template>
 <script lang='ts'>
 import { Component, Vue } from "vue-property-decorator";
