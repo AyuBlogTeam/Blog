@@ -6,7 +6,7 @@
         h1 深海之鱼
       div.search
         input(type="text",placeholder="该网站还在开发哦，程序猿小哥哥非常乐意接收你们的意见哦~")
-        svg.icon(aria-hidden="true")
+        svg.icon(aria-hidden="true",@click="search")
           use(xlink:href="#icon-sousuo")
       div.poetry
         h2 《素年锦时》 
@@ -17,21 +17,24 @@
         h1 {{time}}
       div.username
         h1 {{username}}
+      div.footer 蜀ICP备18020911号
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class Index extends Vue {
-  private time: string = "";
+  private time: number = 0;
   private username: string = "AYUPERSON.TOP";
 
   mounted() {
     this.time = (
       (new Date().getTime() - new Date("2016-02-19").getTime()) /
       86400000
-    )
-      .toFixed()
-      .toString();
+    ).toFixed();
+  }
+
+  private search() {
+    this.$emit("showMessageFun", "warning", "这个模块还在开发哟");
   }
 }
 </script>
@@ -95,6 +98,15 @@ export default class Index extends Vue {
     h1 {
       letter-spacing: 0px;
     }
+  }
+
+  .footer {
+    width: 100%;
+    color: #83af9b;
+    position: fixed;
+    bottom: 10px;
+    text-align: center;
+    left: 0px;
   }
 }
 </style>

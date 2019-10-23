@@ -13,8 +13,20 @@
           div.underline
         li(:class="current==2?'active':''",@click="toRotate(2)") 生活
           div.underline
-      a 反馈
+      a(@click="showFeedbackFun") 反馈
     div.progress(:style="'width:' + progressWidth + '%'")
+    transition(name="fade")
+      div.feedback(v-if="showFeedback")
+        div.content
+          svg.icon(aria-hidden="true",@click="showFeedback=false")
+            use(xlink:href="#icon-guanbi")
+          div.header
+            div.headerContent 反馈
+          div.feedbackContent
+            textarea(v-model="feedback",rows="7",placeholder="有任何建议和意见都可以随便提出来，本反馈实行匿名制，所以程序猿小哥哥无法联系到你哟，有需要的话可以在反馈中留下你的联系方式。")
+          div.footer
+            button(@click="feedbackToSql") 确定
+            button.cancel(@click="showFeedback=false") 取消
 </template>
 
 <script lang="ts">
@@ -23,6 +35,8 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class Header extends Vue {
   private current: number = 0;
+  private feedback: string = "";
+  private showFeedback: boolean = false;
 
   mounted() {
     const pname = window.location.pathname;
@@ -53,6 +67,8 @@ export default class Header extends Vue {
         });
         break;
       case 2:
+        this.$emit("showMessageFun", "warning", "这个模块还在开发哟");
+        return;
         if (this.$route.name == "article") {
           return;
         }
@@ -63,6 +79,30 @@ export default class Header extends Vue {
       default:
         break;
     }
+  }
+
+  private showFeedbackFun() {
+    this.showFeedback = true;
+    this.feedback = "";
+  }
+
+  private feedbackToSql() {
+    if (this.feedback == "") {
+      this.$emit("showMessageFun", "warning", "请输入反馈内容");
+      return;
+    }
+    this.$http
+      .post(IPserver + "feedback/addFeedback.php", {
+        ip: this.$cookies.get("ip"),
+        content: this.feedback
+      })
+      .then(res => {
+        if (res) {
+          this.$emit("showMessageFun", "success", "反馈成功");
+          this.feedback = "";
+          this.showFeedback = false;
+        }
+      });
   }
 
   @Prop()
@@ -87,7 +127,7 @@ strong, em {
   height: 57px;
 
   .wrap {
-    width: 1024px;
+    padding: 0 20px;
     margin: 0 auto;
     overflow: hidden;
 
@@ -168,10 +208,112 @@ strong, em {
     font-size: 24px;
     margin-right: 10px;
   }
+
+  .feedback {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+
+    .content {
+      position: absolute;
+      width: 500px;
+      height: 300px;
+      background: #fff;
+      color: #000;
+      top: 50%;
+      margin-top: -150px;
+      margin-left: -250px;
+      left: 50%;
+      border-radius: 10px;
+
+      .icon {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        transform: scale(0.7);
+      }
+
+      .header {
+        border-bottom: 1px solid #e8eaec;
+        padding: 14px 16px;
+        line-height: 1;
+
+        .headerContent {
+          display: inline-block;
+          width: 100%;
+          height: 20px;
+          line-height: 20px;
+          font-size: 16px;
+          color: #17233d;
+          font-weight: 500;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .feedbackContent {
+        padding: 20px;
+        width: 460px;
+        height: 150px;
+        overflow: hidden;
+        border-bottom: 1px solid #e8eaec;
+
+        textarea {
+          border-radius: 5px;
+          width: 100%;
+          resize: none;
+          border: 1px solid #dcdee2;
+          font-size: 14px;
+          transition: border 0.2s ease-in-out, background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        textarea:focus, textarea:hover {
+          border-color: #57a3f3;
+        }
+      }
+
+      .footer {
+        button {
+          height: 32px;
+          padding: 0 15px;
+          font-size: 14px;
+          border-radius: 4px;
+          border: 1px solid transparent;
+          white-space: nowrap;
+          color: #fff;
+          background-color: #2d8cf0;
+          border-color: #2d8cf0;
+          float: right;
+          margin-right: 20px;
+          margin-top: 10px;
+        }
+
+        .cancel {
+          color: #515a6e;
+          background-color: transparent;
+          border-color: transparent;
+        }
+      }
+    }
+  }
 }
 
 .inHeader {
   background: #fff;
   color: #000;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -22,5 +22,10 @@ if(curl_getinfo($curl,CURLINFO_HTTP_CODE) === 200){
 
   $sql = "INSERT INTO VISITORIP (cip,cid,cname) VALUES ('$cip','$cid','$cname')";
   $result = $conn->query($sql);
+  if($result){
+      $returnResult = new Success();
+      $returnResult->data = $cip;
+      echo json_encode($returnResult);
+  }
 }
 ?>
