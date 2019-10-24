@@ -44,6 +44,7 @@ const VisitorUI = (props)=>{
             <Table 
                 columns={columns} 
                 dataSource={tableData}
+                onChange={props.changePage}
             />
         </div>
         

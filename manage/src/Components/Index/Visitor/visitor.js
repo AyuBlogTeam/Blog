@@ -45,9 +45,15 @@ class Visitor extends Component {
         this.getInfo()
     }
 
-    getInfo(){
+    changePage(index){
+        console.log(index)
+    }
+
+    getInfo(page=1){
         this.props.loading(true)
-        get(IPserver + "visitor/getVisitor.php").then((res)=>{
+        get(IPserver + "visitor/getVisitor.php",{
+            from:(page-1)*10
+        }).then((res)=>{
             this.setState({
                 tableData:res
             })
@@ -64,6 +70,7 @@ class Visitor extends Component {
                 <VisitorUI 
                     state={this.state}
                     delete={this.delete.bind(this)}
+                    changePage={this.changePage.bind(this)}
                 />
             </Fragment>
          );

@@ -1,6 +1,8 @@
 <?php
   include "../common/index.php";
 
+  $from=$_GET["from"];
+  
   class Visitor{
       public $key;
       public $cip;
@@ -9,7 +11,7 @@
       public $time;
   }
 
-  $sql = "SELECT * FROM VISITORIP order by id DESC";
+  $sql = "SELECT * FROM VISITORIP order by id DESC limit $from,10";
 
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
