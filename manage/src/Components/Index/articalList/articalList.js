@@ -7,6 +7,9 @@ import IPserver from 'IPserver';
 import {
   get
 } from 'Common/axios.js'
+import {
+  message
+} from 'antd'
 
 class ArticalList extends Component{
   constructor(props){
@@ -25,6 +28,9 @@ class ArticalList extends Component{
         })
         this.props.loading(false)
       }
+    }).catch(()=>{
+      message.error("请求失败")
+      this.props.loading(false)
     })
   }
   

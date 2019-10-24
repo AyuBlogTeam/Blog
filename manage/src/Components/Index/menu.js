@@ -10,11 +10,16 @@ const leftMenu = (props)=>{
                 defaultOpenKeys={['sub1']}
                 mode="inline"
                 theme="light"
+                onClick={props.checkMenu}
                 inlineCollapsed={collapsed}
             >
                 <Menu.Item key="1">
-                    <Icon type="pie-chart" />
+                    <Icon type="reddit" />
                     <span>日志</span>
+                </Menu.Item>
+                <Menu.Item key="2">
+                    <Icon type="frown" />
+                    <span>访客</span>
                 </Menu.Item>
             </Menu>
         </div>
