@@ -57,6 +57,12 @@ class Index extends Component {
       })
     }
 
+    loading(boo){
+      this.setState({
+        loading:boo
+      })
+    }
+
     add(){
       this.setState({
         isList:false
@@ -86,11 +92,13 @@ class Index extends Component {
                       <List 
                         getArticalId={this.getArticalId.bind(this)}
                         add={this.add.bind(this)}
+                        loading={this.loading.bind(this)}
                       />:
                       <Write 
                         username={username} 
                         articalId={articalId}
                         cancel={this.cancel.bind(this)}
+                        loading={this.loading.bind(this)}
                       />
                     }
                 </div>

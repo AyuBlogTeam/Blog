@@ -17,11 +17,13 @@ class ArticalList extends Component{
   }
 
   componentDidMount(){
+    this.props.loading(true)
     get(IPserver + "articals/getArtical.php").then((res)=>{
       if(res.length !== 0){
         this.setState({
           list:res
         })
+        this.props.loading(false)
       }
     })
   }

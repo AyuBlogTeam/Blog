@@ -63,6 +63,7 @@ class Write extends Component {
   componentDidMount() {
     this.initEditor()
     if(this.props.articalId !== ""){
+      this.props.loading(true)
       get(IPserver + "articals/getOneArtical.php",{
         articalid:this.props.articalId
       }).then((res)=>{
@@ -72,6 +73,7 @@ class Write extends Component {
           articalId:this.props.articalId
         })
         this.editor.txt.html(res.content)
+        this.props.loading(false)
       })
     }else{
       this.setState({
