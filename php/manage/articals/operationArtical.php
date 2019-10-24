@@ -8,9 +8,13 @@ $coverimg = $post['coverImg'];
 $content = htmlspecialchars($post['content'],ENT_QUOTES);
 $editname = $post['username'];
 $kind = $post['kind'];
-$articalid=md5(uniqid("artical",true));
-
-$sql = "INSERT INTO ARTICAL (title,summary,coverimg,content,editname,kind,articalid) VALUES ('$title','$summary','$coverimg','$content','$editname','$kind','$articalid')";
+if(empty($post["articalId"])){
+  $articalid=md5(uniqid("artical",true));
+  $sql = "INSERT INTO ARTICAL (title,summary,coverimg,content,editname,kind,articalid) VALUES ('$title','$summary','$coverimg','$content','$editname','$kind','$articalid')";
+}else{
+  $articalid=$post["articalId"];
+  $sql = "UPDATE ARTICAL SET title='$title',summary='$summary',coverimg='$coverimg',content='$content',editname='$editname',kind='$kind',articalid='$articalid' WHERE articalid='$articalid'";
+}
 
 $result = $conn->query($sql);
 if($result){

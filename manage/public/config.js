@@ -1,2 +1,2 @@
-var IPserver = "http://localhost/blog/";
+var IPserver = "http://localhost/blog/manage/";
 // var IPserver = "";

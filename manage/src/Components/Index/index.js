@@ -2,6 +2,8 @@ import React, { Component,Fragment } from 'react';
 import Header from './header'
 import Menu from './menu'
 import Write from './Write/write'
+import List from './articalList/articalList'
+import Loading from '../Public/loading'
 
 class Index extends Component {
     constructor(props) {
@@ -13,8 +15,15 @@ class Index extends Component {
             menuWidth:"242px",
             rightWidth:"calc(100% - 242px)",
             rightLeft:"242px",
-            username:"阿鱼"
+            username:"阿鱼",
+            articalId:"",
+            isList:true,
+            loading:false
         }
+    }
+
+    componentDidMount(){
+      window.router = this.props.history;
     }
 
     toggleCollapsed(){
@@ -41,8 +50,27 @@ class Index extends Component {
         })
     }
 
+    getArticalId(id){
+      this.setState({
+        articalId:id,
+        isList:false
+      })
+    }
+
+    add(){
+      this.setState({
+        isList:false
+      })
+    }
+
+    cancel(){
+      this.setState({
+        isList:true
+      })
+    }
+
     render() { 
-        const {rightWidth,rightLeft,username} = this.state
+        const {rightWidth,rightLeft,username,isList,articalId,loading} = this.state
         return ( 
             <Fragment>
                 <Header 
@@ -53,11 +81,25 @@ class Index extends Component {
                     state={this.state}
                 />
                 <div id="rightMain" style={{width:rightWidth,left:rightLeft}}>
-                    <Write username={username} />
+                    {
+                      isList?
+                      <List 
+                        getArticalId={this.getArticalId.bind(this)}
+                        add={this.add.bind(this)}
+                      />:
+                      <Write 
+                        username={username} 
+                        articalId={articalId}
+                        cancel={this.cancel.bind(this)}
+                      />
+                    }
                 </div>
+                {
+                  loading?<Loading />:null
+                }
             </Fragment>
          );
     }
-}
+} 
  
 export default Index;

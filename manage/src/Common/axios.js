@@ -1,4 +1,7 @@
 import axios from 'axios'
+import {
+  message
+} from 'antd';
 
 const $http = axios.create({})
 var count = 0
@@ -14,14 +17,11 @@ export const get = (url, params) => {
       } else if (res.data.code === "401") {
         count++
         if (count === 1) {
-        //   iview.Message.error({
-        //     content: "登录过期，请重新登录",
-        //     duration: 3
-        //   })
-        //   setTimeout(() => {
-        //     location.href = '/'
-        //     count = 0
-        //   }, 3000)
+          message.error("登录过期，请重新登录")
+          setTimeout(()=>{
+            window.router.push('/manage/login');
+            count = 0
+          },3000)
         }
       } else {
         reject(res.data.message)
@@ -29,13 +29,7 @@ export const get = (url, params) => {
     }).catch((error) => {
       count++
       if (count === 1) {
-        // iview.Message.error({
-        //   content: "请求失败，请联系管理员",
-        //   duration: 3
-        // })
-        // setTimeout(() => {
-        //   count = 0
-        // }, 3000)
+        message.error("请求失败，请联系管理员")
       }
       reject(error)
     })
@@ -51,25 +45,16 @@ export const post = (url, params) => {
       } else if (res.data.code === "401") {
         count++
         if (count === 1) {
-        //   iview.Message.error({
-        //     content: "登录过期，请重新登录",
-        //     duration: 3
-        //   })
-        //   setTimeout(() => {
-        //     location.href = '/'
-        //     count = 0
-        //   }, 3000)
+          message.error("登录过期，请重新登录")
+          setTimeout(()=>{
+            window.router.push('/manage/login');
+            count = 0
+          },3000)
         }
       } else {
         count++
         if (count === 1) {
-        //   iview.Message.error({
-        //     content: "请求失败，请联系管理员",
-        //     duration: 3
-        //   })
-        //   setTimeout(() => {
-        //     count = 0
-        //   }, 3000)
+          message.error("请求失败，请联系管理员")
         }
         reject(res.data.message);
       }

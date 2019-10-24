@@ -2,7 +2,7 @@
   div#app
     Header(:progressWidth="progress",@showMessageFun="showMessageFun")
     router-view(@showLoading="showLoading",@showMessageFun="showMessageFun")
-    Loader(v-show="loading")
+    Loading(v-show="loading")
     Live2d
     div.backtop(@click="backToTop",v-if="isShowTop")
       svg.icon(aria-hidden="true")
@@ -20,14 +20,14 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import Header from "@/components/Header.vue";
-import Loader from "@/components/Loader.vue";
+import Loading from "@/components/Loading.vue";
 import Live2d from "@/components/Live2d.vue";
 
 import axios from "axios";
 @Component({
   components: {
     Header,
-    Loader,
+    Loading,
     Live2d
   }
 })

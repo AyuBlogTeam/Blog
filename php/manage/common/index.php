@@ -1,4 +1,4 @@
 <?php
 include "../common/connect.php";
-include "../common/result.php";
+include "../common/checkLogin.php";
 ?>

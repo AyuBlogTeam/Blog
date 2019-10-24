@@ -6,11 +6,11 @@ const LoginUi = (props)=>{
     const {loading,username,password,val} = props.all
     return (
         <div id="loginUI">
-            <div className="header">阿鱼的博客网站</div>
+            <div className="header">阿鱼的研发日志</div>
             <div className="page">
                 <Particles 
                     id="particles"
-                    config="particles/particles.json"
+                    config="/particles/particles.json"
                 />
             </div>
             <div className="login">

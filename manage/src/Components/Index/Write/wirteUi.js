@@ -9,7 +9,7 @@ class IndexUi extends Component {
     
     render() { 
         const props = this.props
-        const { previewVisible, previewImage, fileList, articalTitle, articalSummary,articalKind,selectList } = props.state;
+        const { previewVisible, previewImage, fileList, articalTitle, articalSummary,articalKind,selectList,articalId } = props.state;
         const uploadButton = (
           <div>
             <Icon type="plus" />
@@ -57,7 +57,20 @@ class IndexUi extends Component {
                     {list}
                 </Select>
                 </div>
-                <Button className="submit" type="primary" onClick={this.props.submit}>发布</Button>
+                {
+                  articalId !== ""?
+                  <Fragment>
+                    <Button className="submit" type="primary" onClick={props.submit}>更新</Button>
+                    <Button className="cancel" onClick={props.cancel}>取消</Button>
+                    <Button type="danger" className="delete" onClick={props.delete}>删除</Button>
+                  </Fragment>:
+                  <Fragment>
+                    <Button className="submit" type="primary" onClick={props.submit}>发布</Button>
+                    <Button className="cancel" onClick={props.cancel}>取消</Button>
+                  </Fragment>
+                  
+                }
+                
             </Fragment>
          );
     }

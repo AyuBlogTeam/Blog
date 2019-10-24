@@ -10,13 +10,14 @@ import { BrowserRouter,Switch,Route} from "react-router-dom";
 import Index from './Components/Index/index';
 import Login from './Components/Login/login';
 
-const AppRouter = () => (
+
+export const AppRouter = () => (
     <BrowserRouter >
         <Switch>
             <Route path="/manage/" exact component={Index} />
             <Route path="/manage/login" exact component={Login} />
         </Switch>
-    </BrowserRouter >
+    </BrowserRouter>
 );
 
 ReactDOM.render(<AppRouter />, document.getElementById('root'));

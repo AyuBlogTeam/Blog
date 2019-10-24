@@ -14,7 +14,7 @@ const leftMenu = (props)=>{
             >
                 <Menu.Item key="1">
                     <Icon type="pie-chart" />
-                    <span>写文章</span>
+                    <span>日志</span>
                 </Menu.Item>
             </Menu>
         </div>
