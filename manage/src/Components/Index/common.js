@@ -59,6 +59,10 @@ class Common extends Component {
                             <Icon type="frown" />
                             <span>访客</span>
                         </Menu.Item>
+                        <Menu.Item key="3">
+                            <Icon type="yuque" />
+                            <span>看板娘</span>
+                        </Menu.Item>
                     </Menu>
                 </div>
             </Fragment>

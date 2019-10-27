@@ -44,7 +44,7 @@ export default class componentName extends Vue {
   }
 
   private getInfo() {
-    this.$http.get(IPserver + "word/getWord.php").then((res: object[]) => {
+    this.$http.get(IPserver + "live2d/getLive2d.php").then((res: object[]) => {
       if (res) {
         this.wordList = res;
       }

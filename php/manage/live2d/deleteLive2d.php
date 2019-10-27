@@ -10,7 +10,7 @@ for($i=0;$i<count($id);$i++){
 }
 $strid=rtrim($strid,",");
 
-$sql = "DELETE FROM VISITORIP WHERE id in ($strid)";
+$sql = "DELETE FROM LIVE2D WHERE id in ($strid)";
 $result = $conn->query($sql);
 if($result){
     $returnResult = new Success();

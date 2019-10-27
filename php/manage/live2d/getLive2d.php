@@ -5,13 +5,10 @@
   
   class Visitor{
       public $key;
-      public $cip;
-      public $cid;
-      public $cname;
-      public $time;
+      public $content;
   }
 
-  $sql = "SELECT * FROM VISITORIP order by id DESC limit $from,10";
+  $sql = "SELECT * FROM LIVE2D limit $from,10";
 
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
@@ -20,13 +17,10 @@
       while($row = $result->fetch_assoc()) {
           $data = new Visitor();
           $data->key = $row["id"];
-          $data->cip = $row["cip"];
-          $data->cid = $row["cid"];
-          $data->cname = $row["cname"];
-          $data->time = $row["time"];
+          $data->content = $row["content"];
           $returnResult->data->data[] = $data;
       }
-      $sql1 = "SELECT COUNT(*) AS count FROM VISITORIP";
+      $sql1 = "SELECT COUNT(*) AS count FROM LIVE2D";
       $result1 = $conn->query($sql1);
       if ($result1->num_rows > 0) {
         while($row1 = $result1->fetch_assoc()) {

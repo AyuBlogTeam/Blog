@@ -6,7 +6,7 @@ class Word{
   public $content;
 }
 
-$sql = "SELECT * FROM WORD order by RAND() LIMIT 30";
+$sql = "SELECT * FROM LIVE2D order by RAND() LIMIT 30";
 $result = $conn->query($sql);
 if($result->num_rows > 0){
   $returnResult = new Success();

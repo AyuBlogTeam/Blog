@@ -305,6 +305,7 @@ module.exports = function (webpackEnv) {
         'Iconfont': path.resolve(__dirname, '../src/assets/Iconfont'),
         'Images': path.resolve(__dirname, '../src/assets/Images'),
         'Common': path.resolve(__dirname, '../src/Common'),
+        'Components': path.resolve(__dirname, '../src/Components'),
         // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',

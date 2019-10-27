@@ -31,7 +31,7 @@ const ArticalList = (props)=>{
   })
   return (
     <div id="ArticalList">
-      <Button className="fr" onClick={props.add}>新增</Button>
+      <Button className="fr mb10" onClick={props.add}>新增</Button>
       <div className="clear"></div>
       {divlist}
     </div>
