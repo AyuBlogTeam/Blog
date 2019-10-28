@@ -7,6 +7,9 @@ import ArticalList from './ArticalList/articalList'
 import WriteLifeArtical from './WriteLifeArtical/writeLifeArtical'
 import LifeArticalList from './LifeArticalList/lifeArticalList'
 
+import WriteRecord from './WriteRecord/writeRecord'
+import RecordList from './RecordList/recordList'
+
 import Table from 'Components/Public/table'
 import IPserver from 'IPserver';
 import {
@@ -29,8 +32,9 @@ class Index extends Component {
             articalId:"", //文章详情id
             isArticalList:true, //是否显示文章列表
             isLifeArticalList:true, //是否显示记录列表
+            isRecord:true, //是否显示记录列表
             loading:false, //加载状态
-            currentComponent:"2", //当前菜单
+            currentComponent:"1", //当前菜单
             tableData:[], //表格数据
             selectedRowKeys:[], //表格选择行
             total:0, //表格总数据
@@ -41,7 +45,8 @@ class Index extends Component {
               visible:false
             }, //modal数据
             live2dValue:"", //新增live2d内容
-            lifeArticalId:"" //记录详情id
+            lifeArticalId:"", //生活日志详情id
+            recordId:"" //记录详情id
         }
     }
 
@@ -80,6 +85,14 @@ class Index extends Component {
       this.setState({
         lifeArticalId:id,
         isLifeArticalList:false
+      })
+    }
+
+    //获取记录id
+    getRecordId(id){
+      this.setState({
+        recordId:id,
+        isRecord:false
       })
     }
 
@@ -151,7 +164,10 @@ class Index extends Component {
     // 选择菜单
     checkMenu(item){
       this.setState({
-        currentComponent:item.key
+        currentComponent:item.key,
+        isArticalList:true,
+        isLifeArticalList:true,
+        isRecord:true
       },()=>{
         if(this.state.currentComponent === "4" || this.state.currentComponent === "5"){
           this.getTableInfo()
@@ -323,23 +339,39 @@ class Index extends Component {
       })
     }
 
-    //新增记录
+    //新增生活日志
     addLife(){
       this.setState({
-        isLifeArticalList:false
+        isLifeArticalList:false,
+        lifeArticalId:""
+      })
+    }
+
+    //新增记录
+    addRecord(){
+      this.setState({
+        isRecord:false,
+        recordId:""
       })
     }
     
-    //取消新增记录
+    //取消新增生活日志
     cancelAddLife(){
       this.setState({
         isLifeArticalList:true
       })
     }
 
+    //取消新增记录
+    cancelAddRecord(){
+      this.setState({
+        isRecord:true
+      })
+    }
+
     // 渲染页面
     render() { 
-        const {rightWidth,rightLeft,username,isArticalList,articalId,loading,currentComponent,modal,live2dValue,isLifeArticalList,lifeArticalId} = this.state
+        const {rightWidth,rightLeft,username,isArticalList,articalId,loading,currentComponent,modal,live2dValue,isLifeArticalList,lifeArticalId,isRecord,recordId} = this.state
         let rightMain = null
         switch(currentComponent){
           case "1":
@@ -371,6 +403,22 @@ class Index extends Component {
                             username={username}
                             lifeArticalId={lifeArticalId}
                             cancel={this.cancelAddLife.bind(this)}
+                            loading={this.loading.bind(this)}
+                          />
+            }
+            break;
+          case "3":
+            if(isRecord){
+              rightMain = <RecordList 
+                            add={this.addRecord.bind(this)}
+                            loading={this.loading.bind(this)}
+                            getRecordId={this.getRecordId.bind(this)}
+                          />
+            }else{
+              rightMain = <WriteRecord 
+                            username={username}
+                            recordId={recordId}
+                            cancel={this.cancelAddRecord.bind(this)}
                             loading={this.loading.bind(this)}
                           />
             }

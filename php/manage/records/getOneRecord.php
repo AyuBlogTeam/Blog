@@ -3,9 +3,6 @@ include "../common/index.php";
 
 class Artical{
     public $id;
-    public $title;
-    public $summary;
-    public $coverimg;
     public $articalid;
     public $time;
     public $content;
@@ -13,7 +10,7 @@ class Artical{
 
 $articalid=$_GET["articalid"];
 
-$sql = "SELECT * FROM JOURNAL WHERE articalid='$articalid'";
+$sql = "SELECT * FROM RECORD WHERE articalid='$articalid'";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -23,9 +20,6 @@ if ($result->num_rows > 0) {
         $data = new Artical();
         $data->id = $row["id"];
         $data->content = htmlspecialchars_decode($row["content"]);
-        $data->title = $row["title"];
-        $data->summary = $row["summary"];
-        $data->coverimg = $row["coverimg"];
         $data->articalid = $row["articalid"];
         $data->time = $row["sendtime"];
         $returnResult->data = $data;

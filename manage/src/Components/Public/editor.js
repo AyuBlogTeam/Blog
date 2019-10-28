@@ -24,40 +24,54 @@ class IndexUi extends Component {
             )
           })
         }
-        
         return ( 
             <Fragment>
-                <div className="input">
-                    <Input 
-                        addonBefore="标题"
-                        value={articalTitle}
-                        onChange={props.changeTitle}
-                     />
-                </div>
-                <div className="input">
-                    <Input.TextArea 
-                        placeholder="请输入概述"
-                        value={articalSummary}
-                        onChange={props.changeSummary}
-                        autosize={{ minRows: 3, maxRows: 6 }} />
-                </div>
-                <div className="input">
-                    <Upload
-                        action={IPserver + "articals/uploadImg.php"}
-                        listType="picture-card"
-                        fileList={fileList}
-                        onPreview={props.handlePreview}
-                        onChange={props.handleChange}
-                        >
-                        {fileList.length >= 1 ? null : uploadButton}
-                    </Upload>
-                    <Modal visible={previewVisible} footer={null} onCancel={props.handleCancel}>
-                        <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                    </Modal>
-                </div>
+                {
+                  articalTitle !== undefined?
+                  <Fragment>
+                    <div className="input">
+                        <Input 
+                            addonBefore="标题"
+                            value={articalTitle}
+                            onChange={props.changeTitle}
+                        />
+                    </div>
+                  </Fragment>:null
+                }
+                {
+                  articalSummary !== undefined?
+                  <Fragment>
+                    <div className="input">
+                        <Input.TextArea 
+                            placeholder="请输入概述"
+                            value={articalSummary}
+                            onChange={props.changeSummary}
+                            autosize={{ minRows: 3, maxRows: 6 }} />
+                    </div>
+                  </Fragment>:null
+                }
+                {
+                  fileList !== undefined?
+                  <Fragment>
+                    <div className="input">
+                      <Upload
+                          action={IPserver + "articals/uploadImg.php"}
+                          listType="picture-card"
+                          fileList={fileList}
+                          onPreview={props.handlePreview}
+                          onChange={props.handleChange}
+                          >
+                          {fileList.length >= 1 ? null : uploadButton}
+                      </Upload>
+                      <Modal visible={previewVisible} footer={null} onCancel={props.handleCancel}>
+                          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                      </Modal>
+                  </div>
+                  </Fragment>:null
+                }
                 <div className="input" ref={r=>this.editorElem = r} style={{ textAlign: 'left' }} />
                 {
-                  selectList?
+                  selectList !== undefined?
                   <Fragment>
                     <div className="input">
                       <Select defaultValue={articalKind} style={{ width: 200 }} onChange={props.changeKind}>

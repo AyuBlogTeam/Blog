@@ -1,5 +1,5 @@
 import React, { Component,Fragment } from 'react';
-import WriteLifeUi from 'Components/Public/editor.js';
+import WriteRecordUi from 'Components/Public/editor.js';
 import E from 'wangeditor'
 import {
   post,get
@@ -12,60 +12,23 @@ import IPserver from 'IPserver';
 
 const { confirm } = Modal;
 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-}
-
-class WriteLife extends Component {
+class WriteRecord extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      previewVisible: false,
-      previewImage: '',
-      fileList: [],
-      articalTitle: "",
-      articalSummary: "",
       articalId:""
     }
   }
 
-  handleCancel = () => this.setState({
-    previewVisible: false
-  });
-
-  handlePreview = async file => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-
-    this.setState({
-      previewImage: file.url || file.preview,
-      previewVisible: true,
-    });
-  };
-
-  handleChange = ({fileList}) => {
-    this.setState({
-      fileList
-    })
-  };
-
   componentDidMount() {
     this.initEditor()
-    if(this.props.lifeArticalId !== ""){
+    if(this.props.recordId !== ""){
       this.props.loading(true)
-      get(IPserver + "journals/getOneJournal.php",{
-        articalid:this.props.lifeArticalId
+      get(IPserver + "records/getOneRecord.php",{
+        articalid:this.props.recordId
       }).then((res)=>{
         this.setState({
-          articalTitle:res.title,
-          articalSummary:res.summary,
-          articalId:this.props.lifeArticalId
+          articalId:this.props.recordId
         })
         this.editor.txt.html(res.content)
         this.props.loading(false)
@@ -141,25 +104,13 @@ class WriteLife extends Component {
     editor.create()
   }
 
-  changeTitle(e) {
-    this.setState({
-      articalTitle: e.target.value
-    })
-  }
-
-  changeSummary(e) {
-    this.setState({
-      articalSummary: e.target.value
-    })
-  }
-
   delete(){
     let that = this;
     confirm({
       title: '警告',
       content: '确定要删除这篇博客吗？（删除后不可恢复）',
       onOk() {
-        get(IPserver + "journals/deleteJournal.php",{
+        get(IPserver + "records/deleteRecord.php",{
           articalId:that.state.articalId
         }).then((res)=>{
           if(res){
@@ -177,28 +128,13 @@ class WriteLife extends Component {
   }
 
   submit() {
-    if (this.state.articalTitle === "") {
-      message.warn("请输入标题")
-      return
-    }
-    if (this.state.articalSummary === "") {
-      message.warn("请输入概述")
-      return
-    }
-    if (this.state.fileList.length === 0) {
-      message.warn("请选择封面")
-      return
-    }
     if (this.editor.txt.html() === "<p><br></p>") {
       message.warn("请输入文章内容")
       return
     }
 
-    post(IPserver + "journals/operationJournal.php", {
+    post(IPserver + "records/operationRecord.php", {
       articalId:this.state.articalId,
-      title: this.state.articalTitle,
-      summary: this.state.articalSummary,
-      coverImg: this.state.fileList[0].response.data[0],
       content: this.editor.txt.html(),
       username: this.props.username
     }).then((res) => {
@@ -222,15 +158,10 @@ class WriteLife extends Component {
   render() {
     return ( 
       <Fragment>
-        <WriteLifeUi
+        <WriteRecordUi
           ref = {r => this.child = r}
           submit = {this.submit.bind(this)}
           state = {this.state}
-          handleChange = {this.handleChange.bind(this)}
-          handleCancel = {this.handleCancel.bind(this)}
-          handlePreview = {this.handlePreview.bind(this)}
-          changeTitle = {this.changeTitle.bind(this)}
-          changeSummary = {this.changeSummary.bind(this)}
           cancel={this.props.cancel}
           delete={this.delete.bind(this)}
         /> 
@@ -239,4 +170,4 @@ class WriteLife extends Component {
   }
 }
 
-export default WriteLife;
+export default WriteRecord;
