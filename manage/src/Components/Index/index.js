@@ -122,6 +122,29 @@ class Index extends Component {
       })
     }
 
+    // 新增live2d内容切换触发事件
+    changeLive2d(e){
+      this.setState({
+        live2dValue: e.target.value
+      })
+    }
+
+    //新增生活日志
+    addLife(){
+      this.setState({
+        isLifeArticalList:false,
+        lifeArticalId:""
+      })
+    }
+
+    //新增记录
+    addRecord(){
+      this.setState({
+        isRecord:false,
+        recordId:""
+      })
+    }
+
     // 提交新增live2d内容
     submitLive2d(){
       if(this.state.live2dValue === ""){
@@ -158,6 +181,20 @@ class Index extends Component {
     cancelAdd(){
       this.setState({
         isArticalList:true
+      })
+    }
+    
+    //取消新增生活日志
+    cancelAddLife(){
+      this.setState({
+        isLifeArticalList:true
+      })
+    }
+
+    //取消新增记录
+    cancelAddRecord(){
+      this.setState({
+        isRecord:true
       })
     }
 
@@ -330,43 +367,6 @@ class Index extends Component {
             this.loading(false)
             message.error("获取数据失败")
         })
-    }
-
-    // 新增live2d内容切换触发事件
-    changeLive2d(e){
-      this.setState({
-        live2dValue: e.target.value
-      })
-    }
-
-    //新增生活日志
-    addLife(){
-      this.setState({
-        isLifeArticalList:false,
-        lifeArticalId:""
-      })
-    }
-
-    //新增记录
-    addRecord(){
-      this.setState({
-        isRecord:false,
-        recordId:""
-      })
-    }
-    
-    //取消新增生活日志
-    cancelAddLife(){
-      this.setState({
-        isLifeArticalList:true
-      })
-    }
-
-    //取消新增记录
-    cancelAddRecord(){
-      this.setState({
-        isRecord:true
-      })
     }
 
     // 渲染页面
