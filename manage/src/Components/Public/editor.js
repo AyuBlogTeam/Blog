@@ -16,11 +16,15 @@ class IndexUi extends Component {
             <div className="ant-upload-text">上传封面</div>
           </div>
         );
-        const list = selectList.map((item,index)=>{
-          return (
-            <Select.Option value={item} key={index}>{item}</Select.Option>
-          )
-        })
+        let list;
+        if(selectList !== undefined){
+          list = selectList.map((item,index)=>{
+            return (
+              <Select.Option value={item} key={index}>{item}</Select.Option>
+            )
+          })
+        }
+        
         return ( 
             <Fragment>
                 <div className="input">
@@ -52,11 +56,16 @@ class IndexUi extends Component {
                     </Modal>
                 </div>
                 <div className="input" ref={r=>this.editorElem = r} style={{ textAlign: 'left' }} />
-                <div className="input">
-                <Select defaultValue={articalKind} style={{ width: 200 }} onChange={props.changeKind}>
-                    {list}
-                </Select>
-                </div>
+                {
+                  selectList?
+                  <Fragment>
+                    <div className="input">
+                      <Select defaultValue={articalKind} style={{ width: 200 }} onChange={props.changeKind}>
+                          {list}
+                      </Select>
+                    </div>
+                  </Fragment>:null
+                }
                 {
                   articalId !== ""?
                   <Fragment>
@@ -68,9 +77,7 @@ class IndexUi extends Component {
                     <Button className="submit" type="primary" onClick={props.submit}>发布</Button>
                     <Button className="cancel" onClick={props.cancel}>取消</Button>
                   </Fragment>
-                  
                 }
-                
             </Fragment>
          );
     }

@@ -2,7 +2,7 @@ import React, {
   Component,
   Fragment
 } from 'react';
-import ArticalListUi from './articalListUi';
+import LifeListUi from './lifeArticalListUi';
 import IPserver from 'IPserver';
 import {
   get
@@ -11,7 +11,7 @@ import {
   message
 } from 'antd'
 
-class ArticalList extends Component{
+class LifeList extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -21,7 +21,7 @@ class ArticalList extends Component{
 
   componentDidMount(){
     this.props.loading(true)
-    get(IPserver + "articals/getArtical.php").then((res)=>{
+    get(IPserver + "journals/getJournal.php").then((res)=>{
       if(res.length !== 0){
         this.setState({
           list:res
@@ -33,18 +33,18 @@ class ArticalList extends Component{
       this.props.loading(false)
     })
   }
-  
+
   render(){
     return(
-      <Fragment >
-        <ArticalListUi 
-          state={this.state} 
-          toWrite={this.props.getArticalId}
-          add={this.props.add}
-        />
+      <Fragment>
+        <LifeListUi 
+          add={this.props.add.bind(this)}
+          toWrite={this.props.getLifeArticalId}
+          state={this.state}
+          />
       </Fragment>
     )
   }
 }
 
-export default ArticalList
+export default LifeList;

@@ -1,8 +1,5 @@
-import React, {
-  Component,
-  Fragment
-} from 'react';
-import WriteUi from './wirteUi';
+import React, { Component,Fragment } from 'react';
+import WriteLifeUi from 'Components/Public/editor.js';
 import E from 'wangeditor'
 import {
   post,get
@@ -24,7 +21,7 @@ function getBase64(file) {
   });
 }
 
-class Write extends Component {
+class WriteLife extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,8 +30,6 @@ class Write extends Component {
       fileList: [],
       articalTitle: "",
       articalSummary: "",
-      articalKind: "React",
-      selectList: ["React", "Vue", "Angular", "PHP", "Java", "Python", "Javascript", "CSS", "TypeScript", "杂七杂八"],
       articalId:""
     }
   }
@@ -62,17 +57,20 @@ class Write extends Component {
 
   componentDidMount() {
     this.initEditor()
-    if(this.props.articalId !== ""){
+    if(this.props.lifeArticalId !== ""){
       this.props.loading(true)
-      get(IPserver + "articals/getOneArtical.php",{
-        articalid:this.props.articalId
+      get(IPserver + "journals/getOneJournal.php",{
+        articalid:this.props.lifeArticalId
       }).then((res)=>{
         this.setState({
           articalTitle:res.title,
           articalSummary:res.summary,
-          articalId:this.props.articalId
+          articalId:this.props.lifeArticalId
         })
         this.editor.txt.html(res.content)
+        this.props.loading(false)
+      }).catch((error)=>{
+        message.error("获取数据失败")
         this.props.loading(false)
       })
     }else{
@@ -89,7 +87,7 @@ class Write extends Component {
     this.editor = editor
 
     editor.customConfig.zIndex = 100
-    editor.customConfig.uploadImgServer = IPserver + "articals/uploadImg.php"
+    editor.customConfig.uploadImgServer = IPserver + "lifes/uploadImg.php"
     editor.customConfig.uploadFileName = "file"; //文件名称  也就是你在后台接受的 参数值
     editor.customConfig.uploadImgMaxLength = 1 // 限制一次最多上传 1 张图片
     editor.customConfig.uploadImgShowBase64 = false // 使用 base64 保存图片
@@ -155,19 +153,13 @@ class Write extends Component {
     })
   }
 
-  changeKind(value) {
-    this.setState({
-      articalKind: value
-    })
-  }
-
   delete(){
     let that = this;
     confirm({
       title: '警告',
       content: '确定要删除这篇博客吗？（删除后不可恢复）',
       onOk() {
-        get(IPserver + "articals/deleteArtical.php",{
+        get(IPserver + "journals/deleteJournal.php",{
           articalId:that.state.articalId
         }).then((res)=>{
           if(res){
@@ -202,7 +194,7 @@ class Write extends Component {
       return
     }
 
-    post(IPserver + "articals/operationArtical.php", {
+    post(IPserver + "journals/operationJournal.php", {
       articalId:this.state.articalId,
       title: this.state.articalTitle,
       summary: this.state.articalSummary,
@@ -231,7 +223,7 @@ class Write extends Component {
   render() {
     return ( 
       <Fragment>
-        <WriteUi
+        <WriteLifeUi
           ref = {r => this.child = r}
           submit = {this.submit.bind(this)}
           state = {this.state}
@@ -240,7 +232,6 @@ class Write extends Component {
           handlePreview = {this.handlePreview.bind(this)}
           changeTitle = {this.changeTitle.bind(this)}
           changeSummary = {this.changeSummary.bind(this)}
-          changeKind = {this.changeKind.bind(this)}
           cancel={this.props.cancel}
           delete={this.delete.bind(this)}
         /> 
@@ -249,4 +240,4 @@ class Write extends Component {
   }
 }
 
-export default Write;
+export default WriteLife;

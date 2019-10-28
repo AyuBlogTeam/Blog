@@ -1,8 +1,12 @@
 import React, { Component,Fragment } from 'react';
 import Loading from '../Public/loading'
 import Common from './common'
-import Write from './Write/write'
-import List from './ArticalList/articalList'
+import WriteArtical from './WriteArtical/writeArtical'
+import ArticalList from './ArticalList/articalList'
+
+import WriteLifeArtical from './WriteLifeArtical/writeLifeArtical'
+import LifeArticalList from './LifeArticalList/lifeArticalList'
+
 import Table from 'Components/Public/table'
 import IPserver from 'IPserver';
 import {
@@ -24,8 +28,9 @@ class Index extends Component {
             username:"阿鱼", //用户名
             articalId:"", //文章详情id
             isArticalList:true, //是否显示文章列表
+            isLifeArticalList:true, //是否显示记录列表
             loading:false, //加载状态
-            currentComponent:"1", //当前菜单
+            currentComponent:"2", //当前菜单
             tableData:[], //表格数据
             selectedRowKeys:[], //表格选择行
             total:0, //表格总数据
@@ -33,26 +38,20 @@ class Index extends Component {
             currentPage:1, //表格当前页码
             modal:{
               title:"新增",
-              visible:false,
-              confirmLoading:false
+              visible:false
             }, //modal数据
             live2dValue:"", //新增live2d内容
+            lifeArticalId:"" //记录详情id
         }
     }
 
-    /**
-     * 组件挂载后
-     */
+    // 组件挂载后
     componentDidMount(){
-      /**
-       * 将路由对象赋值给window对象方便axios判断时调用
-       */
+      //将路由对象赋值给window对象方便axios判断时调用
       window.router = this.props.history;
     }
 
-    /**
-     * 改变宽度
-     */
+    //改变宽度
     changeWidth(boo){
       if(!boo){
         this.setState({
@@ -67,10 +66,8 @@ class Index extends Component {
       }
       
     }
-
-    /**
-     * 获取文章id
-     */
+    
+    //获取文章id
     getArticalId(id){
       this.setState({
         articalId:id,
@@ -78,41 +75,41 @@ class Index extends Component {
       })
     }
 
-    /**
-     * 加载框
-     */
+    //获取生活文章id
+    getLifeArticalId(id){
+      this.setState({
+        lifeArticalId:id,
+        isLifeArticalList:false
+      })
+    }
+
+    // 加载框
     loading(boo){
       this.setState({
         loading:boo
       })
     }
 
-    /**
-     * 新增文章
-     */
+    // 新增文章
     addArtical(){
       this.setState({
-        isArticalList:false
+        isArticalList:false,
+        articalId:""
       })
     }
 
-    /**
-     * 新增Live2d内容
-     */
+    // 新增Live2d内容
     addLive2d(){
       this.setState({
         modal:{
           title:"新增看板娘语录",
-          visible:true,
-          confirmLoading:false
+          visible:true
         },
         live2dValue:""
       })
     }
 
-    /**
-     * 提交新增live2d内容
-     */
+    // 提交新增live2d内容
     submitLive2d(){
       if(this.state.live2dValue === ""){
         message.warning("请输入内容");
@@ -127,59 +124,47 @@ class Index extends Component {
           this.setState({
             modal:{
               title:"",
-              visible:false,
-              confirmLoading:false
+              visible:false
             }
           })
         }
       })
     }
 
-    /**
-     * 关闭模态框
-     */
+    // 关闭模态框
     closeModal(){
       this.setState({
         modal:{
           title:"",
-          visible:false,
-          confirmLoading:false
+          visible:false
         }
       })
     }
 
-    /**
-     * 取消新增
-     */
-    cancelAddArtical(){
+    // 取消新增
+    cancelAdd(){
       this.setState({
         isArticalList:true
       })
     }
 
-    /**
-     * 选择菜单
-     */
+    // 选择菜单
     checkMenu(item){
       this.setState({
         currentComponent:item.key
       },()=>{
-        if(this.state.currentComponent === "2" || this.state.currentComponent === "3"){
+        if(this.state.currentComponent === "4" || this.state.currentComponent === "5"){
           this.getTableInfo()
         }
       })
     }
 
-    /**
-     * 表格分页切换
-     */
+    // 表格分页切换
     changeTablePage(item){
       this.getTableInfo(item.current)
     }
 
-    /**
-     * 删除表格数据
-     */
+    // 删除表格数据
     deleteTableData(key){
       let data;
       if(key === "all"){
@@ -195,11 +180,11 @@ class Index extends Component {
       let url;
       let content;
       switch(this.state.currentComponent){
-        case "2":
+        case "4":
           url = IPserver + "visitor/deleteVisitor.php";
           content = "确定要删除选择的访客记录吗？（删除后不可恢复）";
           break;
-        case "3":
+        case "5":
           url = IPserver + "live2d/deleteLive2d.php";
           content = "确定要删除选择的内容吗？（删除后不可恢复）";
           break;
@@ -231,23 +216,19 @@ class Index extends Component {
       });
     }
 
-    /**
-     * 多选编辑操作
-     */
+    // 多选编辑操作
     onSelectTableChange(item){
       this.setState({
         selectedRowKeys:item
       })
     }
 
-    /**
-     * 获取表格数据
-     */
+    // 获取表格数据
     getTableInfo(page=1){
         this.loading(true)
         let url;
         switch(this.state.currentComponent){
-          case "2":
+          case "4":
             url = IPserver + "visitor/getVisitor.php";
             this.setState({
               columns:[
@@ -288,7 +269,7 @@ class Index extends Component {
               ]
             })
             break;
-          case "3":
+          case "5":
             url = IPserver + "live2d/getLive2d.php";
             this.setState({
               columns:[
@@ -335,40 +316,66 @@ class Index extends Component {
         })
     }
 
-    /**
-     * 新增live2d内容切换触发事件
-     */
+    // 新增live2d内容切换触发事件
     changeLive2d(e){
       this.setState({
         live2dValue: e.target.value
       })
     }
 
-    /**
-     * 渲染页面
-     */
+    //新增记录
+    addLife(){
+      this.setState({
+        isLifeArticalList:false
+      })
+    }
+    
+    //取消新增记录
+    cancelAddLife(){
+      this.setState({
+        isLifeArticalList:true
+      })
+    }
+
+    // 渲染页面
     render() { 
-        const {rightWidth,rightLeft,username,isArticalList,articalId,loading,currentComponent,modal,live2dValue} = this.state
+        const {rightWidth,rightLeft,username,isArticalList,articalId,loading,currentComponent,modal,live2dValue,isLifeArticalList,lifeArticalId} = this.state
         let rightMain = null
         switch(currentComponent){
           case "1":
             if(isArticalList){
-              rightMain = <List 
+              rightMain = <ArticalList 
                             getArticalId={this.getArticalId.bind(this)}
                             add={this.addArtical.bind(this)}
                             loading={this.loading.bind(this)}
                           />
               break;
             }else{
-              rightMain = <Write 
+              rightMain = <WriteArtical 
                             username={username}
                             articalId={articalId}
-                            cancel={this.cancelAddArtical.bind(this)}
+                            cancel={this.cancelAdd.bind(this)}
                             loading={this.loading.bind(this)}
                           />
               break;
             }
           case "2":
+            if(isLifeArticalList){
+              rightMain = <LifeArticalList 
+                            add={this.addLife.bind(this)}
+                            loading={this.loading.bind(this)}
+                            getLifeArticalId={this.getLifeArticalId.bind(this)}
+                          />
+            }else{
+              rightMain = <WriteLifeArtical 
+                            username={username}
+                            lifeArticalId={lifeArticalId}
+                            cancel={this.cancelAddLife.bind(this)}
+                            loading={this.loading.bind(this)}
+                          />
+            }
+            break;
+          case "4":
             rightMain = <Table 
                           loading={this.loading.bind(this)}
                           state={this.state}
@@ -378,7 +385,7 @@ class Index extends Component {
                           deleteData={this.deleteTableData.bind(this)}
                         />
             break;
-          case "3":
+          case "5":
             rightMain = <Table 
                           loading={this.loading.bind(this)}
                           state={this.state}
@@ -407,7 +414,6 @@ class Index extends Component {
                   title={modal.title}
                   visible={modal.visible}
                   onOk={this.submitLive2d.bind(this)}
-                  confirmLoading={modal.confirmLoading}
                   onCancel={this.closeModal.bind(this)}
                   okText="确定"
                   cancelText="取消"
