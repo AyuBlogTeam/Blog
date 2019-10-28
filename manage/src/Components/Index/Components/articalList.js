@@ -2,7 +2,7 @@ import React, {
   Component,
   Fragment
 } from 'react';
-import ArticalListUi from './articalListUi';
+import ArticalListUi from 'Components/Public/list';
 import IPserver from 'IPserver';
 import {
   get

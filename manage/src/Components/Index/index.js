@@ -1,14 +1,14 @@
 import React, { Component,Fragment } from 'react';
 import Loading from '../Public/loading'
 import Common from './common'
-import WriteArtical from './WriteArtical/writeArtical'
-import ArticalList from './ArticalList/articalList'
+import WriteArtical from './Components/writeArtical'
+import ArticalList from './Components/articalList'
 
-import WriteLifeArtical from './WriteLifeArtical/writeLifeArtical'
-import LifeArticalList from './LifeArticalList/lifeArticalList'
+import WriteLifeArtical from './Components/writeLifeArtical'
+import LifeArticalList from './Components/lifeArticalList'
 
-import WriteRecord from './WriteRecord/writeRecord'
-import RecordList from './RecordList/recordList'
+import WriteRecord from './Components/writeRecord'
+import RecordList from './Components/recordList'
 
 import Table from 'Components/Public/table'
 import IPserver from 'IPserver';
