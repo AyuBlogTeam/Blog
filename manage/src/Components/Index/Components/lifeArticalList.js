@@ -2,7 +2,7 @@ import React, {
   Component,
   Fragment
 } from 'react';
-import LifeListUi from './lifeArticalListUi';
+import LifeListUi from 'Components/Public/list';
 import IPserver from 'IPserver';
 import {
   get

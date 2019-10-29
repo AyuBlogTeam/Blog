@@ -60,7 +60,7 @@ class Common extends Component {
                             <span>生活日志</span>
                         </Menu.Item>
                         <Menu.Item key="3">
-                            <Icon type="highlight" />
+                            <Icon type="rocket" />
                             <span>记录</span>
                         </Menu.Item>
                         <Menu.Item key="4">
@@ -70,6 +70,10 @@ class Common extends Component {
                         <Menu.Item key="5">
                             <Icon type="yuque" />
                             <span>看板娘</span>
+                        </Menu.Item>
+                        <Menu.Item key="6">
+                            <Icon type="deployment-unit" />
+                            <span>反馈</span>
                         </Menu.Item>
                     </Menu>
                 </div>

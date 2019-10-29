@@ -2,7 +2,7 @@ import React, {
   Component,
   Fragment
 } from 'react';
-import RecordListUi from './recordListUi';
+import RecordListUi from 'Components/Public/list';
 import IPserver from 'IPserver';
 import {
   get
