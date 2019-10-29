@@ -1,7 +1,7 @@
 <template lang='pug'>
   div#live2d
     div.live2d-panel
-      div.dialogue-live2d(ref="live2dDialogue") {{word}}
+      div.dialogue-live2d(ref="live2dDialogue",v-if="islive2d") {{word}}
       live2d(v-if="islive2d" :width=300 :height=400 :modelPath="'/live2dw/live2d-widget-model-' + modelArr[5] + '.json'")
 </template>
 <script lang='ts'>
@@ -44,9 +44,10 @@ export default class componentName extends Vue {
   }
 
   private getInfo() {
-    this.$http.get(IPserver + "live2d/getLive2d.php").then((res: object[]) => {
+    this.$http.get(IPserver + "live2d/getLive2d.php").then((res: string[]) => {
       if (res) {
         this.wordList = res;
+        this.islive2d = true
       }
     });
   }

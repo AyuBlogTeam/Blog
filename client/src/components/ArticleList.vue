@@ -110,4 +110,8 @@ export default class IndexList extends Vue {
     margin-top: 20px;
   }
 }
+
+.oneArticle:first-child{
+  margin-top:0px;
+}
 </style>

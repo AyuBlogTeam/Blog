@@ -23,7 +23,7 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class Index extends Vue {
-  private time: number = 0;
+  private time: string = "0";
   private username: string = "AYUPERSON.TOP";
 
   mounted() {

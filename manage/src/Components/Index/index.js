@@ -206,7 +206,7 @@ class Index extends Component {
         isLifeArticalList:true,
         isRecord:true
       },()=>{
-        if(this.state.currentComponent === "4" || this.state.currentComponent === "5"){
+        if(this.state.currentComponent === "4" || this.state.currentComponent === "5" || this.state.currentComponent === "6"){
           this.getTableInfo()
         }
       })
@@ -240,6 +240,10 @@ class Index extends Component {
         case "5":
           url = IPserver + "live2d/deleteLive2d.php";
           content = "确定要删除选择的内容吗？（删除后不可恢复）";
+          break;
+        case "6":
+          url = IPserver + "feedback/deleteFeedback.php";
+          content = "确定要删除选择的反馈吗？（删除后不可恢复）";
           break;
         default:
           break;
@@ -351,6 +355,47 @@ class Index extends Component {
               ]
             })
             break;
+          case "6":
+            url = IPserver + "feedback/getFeedback.php";
+            this.setState({
+              columns:[
+                {
+                    title: '编号',
+                    dataIndex: 'key',
+                    key: 'key',
+                    align:"center"
+                },
+                {
+                    title: '内容',
+                    dataIndex: 'content',
+                    key: 'content',
+                    align:"center"
+                },
+                {
+                    title: '时间',
+                    dataIndex: 'time',
+                    key: 'time',
+                    align:"center"
+                },
+                {
+                    title: 'IP',
+                    dataIndex: 'ip',
+                    key: 'ip',
+                    align:"center"
+                },
+                {
+                    title: '操作',
+                    key: 'action',
+                    align:"center",
+                    render: (text) => {
+                        return (
+                            <span className="deleteBtn" onClick={()=>this.deleteTableData(text.key)}>删除</span>
+                        )
+                    },
+                }
+              ]
+            })
+            break;
           default:
             break;
         }
@@ -429,7 +474,6 @@ class Index extends Component {
                           state={this.state}
                           changePage={this.changeTablePage.bind(this)}
                           onSelectChange={this.onSelectTableChange.bind(this)}
-                          addLive2d={this.addLive2d.bind(this)}
                           deleteData={this.deleteTableData.bind(this)}
                         />
             break;
@@ -440,6 +484,15 @@ class Index extends Component {
                           changePage={this.changeTablePage.bind(this)}
                           onSelectChange={this.onSelectTableChange.bind(this)}
                           addLive2d={this.addLive2d.bind(this)}
+                          deleteData={this.deleteTableData.bind(this)}
+                        />
+            break;
+          case "6":
+            rightMain = <Table 
+                          loading={this.loading.bind(this)}
+                          state={this.state}
+                          changePage={this.changeTablePage.bind(this)}
+                          onSelectChange={this.onSelectTableChange.bind(this)}
                           deleteData={this.deleteTableData.bind(this)}
                         />
             break;
