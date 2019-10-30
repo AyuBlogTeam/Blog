@@ -19,7 +19,7 @@ export const get = (url, params) => {
         if (count === 1) {
           message.error("登录过期，请重新登录")
           setTimeout(()=>{
-            window.router.push('/manage/login');
+            window.router.push('/login');
             count = 0
           },3000)
         }
@@ -47,7 +47,7 @@ export const post = (url, params) => {
         if (count === 1) {
           message.error("登录过期，请重新登录")
           setTimeout(()=>{
-            window.router.push('/manage/login');
+            window.router.push('/login');
             count = 0
           },3000)
         }

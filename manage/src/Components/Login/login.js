@@ -65,7 +65,7 @@ class Login extends Component {
       })
       if (res.data.code === "200") {
         message.success("登录成功")
-        this.props.history.push('/manage/')
+        this.props.history.push('/')
       } else if (res.data.code === "401") {
         message.error("账号或密码错误")
       } else {

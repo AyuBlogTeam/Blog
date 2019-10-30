@@ -12,10 +12,10 @@ import Login from './Components/Login/login';
 
 
 export const AppRouter = () => (
-    <BrowserRouter >
+    <BrowserRouter basename="/manage">
         <Switch>
-            <Route path="/manage/" exact component={Index} />
-            <Route path="/manage/login" exact component={Login} />
+            <Route path="/" exact component={Index} />
+            <Route path="/login" exact component={Login} />
         </Switch>
     </BrowserRouter>
 );
