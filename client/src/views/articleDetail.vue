@@ -65,7 +65,9 @@ export default class articleDetails extends Vue {
   font-size: 100%;
   background-color: #f1f1f1;
 }
-
+.content >>> pre{
+  white-space: inherit;
+}
 .content {
   background: #fff;
   padding: 20px;

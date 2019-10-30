@@ -78,7 +78,9 @@ export default class lifeDetails extends Vue {
   padding: 20px;
   margin-bottom: 20px;
 }
-
+.content >>> pre{
+  white-space: inherit;
+}
 .main {
   display: flex;
 }

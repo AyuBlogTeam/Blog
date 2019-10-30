@@ -57,9 +57,9 @@ export default class Index extends Vue {
 
   h1 {
     line-height: 100px;
-    width: 100%;
     text-align: center;
     letter-spacing: 30px;
+    padding-left:30px;
     color: rgb(131, 175, 155);
   }
 

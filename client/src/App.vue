@@ -49,7 +49,7 @@ export default class App extends Vue {
     if (this.$cookies.get("ip") == null) {
       axios.get(IPserver + "ip/setIp.php").then(res => {
         if (res.data != "") {
-          this.$cookies.set("ip", res.data);
+          this.$cookies.set("ip", res.data,(60*60));
         }
       });
     }
