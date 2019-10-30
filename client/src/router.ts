@@ -2,6 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 const Article = () => import("@/views/article.vue");
 const ArticleDetails = () => import("@/views/articleDetail.vue");
+const Life = () => import("@/views/life.vue");
+const LifeDetails = () => import("@/views/lifeDetail.vue");
 const HomePage = () => import("@/views/index.vue");
 
 Vue.use(Router);
@@ -24,6 +26,16 @@ export default new Router({
       path: "/article/:id",
       name: "articleDetails",
       component: ArticleDetails
+    },
+    {
+      path: "/life",
+      name: "life",
+      component: Life
+    },
+    {
+      path: "/life/:id",
+      name: "lifeDetails",
+      component: LifeDetails
     }
   ]
 });

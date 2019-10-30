@@ -13,6 +13,7 @@ body
   width 70%
 .main
   margin 0 auto
+  margin-top: 67px;
 .infoCard 
   flex 1
   margin-left 1%
@@ -37,5 +38,26 @@ body
   }
   .allHeader .wrap{
     max-width: 1024px;
+  }
+}
+
+@media (max-width: 767px){
+  .infoCard{
+    display: none;
+  }
+  .w70{
+    width:100%;
+    margin:20px;
+    margin-top:0px;
+  }
+  .headMenu{
+    display:none;
+  }
+  .phone{
+    display:block!important;
+  }
+  .feedback .content{
+    width:300px!important;
+    margin-left:-150px!important;
   }
 }

@@ -3,7 +3,7 @@
     div.w70(style="background:#fff;")
       div.content(v-html="content")
     div.infoCard
-      IndexUserInfo(@toArticleDetail="toArticleDetail",:currentComponent="'article'")
+      IndexUserInfo(@toArticleDetail="toLifeDetail",:currentComponent="'life'")
     div.clear
 </template>
 
@@ -15,30 +15,37 @@ import IndexUserInfo from "@/components/UserInfo.vue";
     IndexUserInfo
   }
 })
-export default class articleDetails extends Vue {
+export default class lifeDetails extends Vue {
   private content: string = "";
 
   mounted() {
     document.documentElement.scrollTop = 0;
-    this.getArtical(this.$route.params.id);
+    if (
+      this.$cookies.get("content") != null &&
+      this.$cookies.get("content") != "undefined"
+    ) {
+      this.content = this.$cookies.get("content");
+    } else {
+      this.getLife(this.$route.params.id);
+    }
   }
 
-  private toArticleDetail(id: string) {
+  private toLifeDetail(id: string) {
     if (this.$route.params.id == id) {
       return;
     }
     this.$router.push({
-      name: `articleDetails`,
+      name: `lifeDetails`,
       params: {
         id: id
       }
     });
   }
 
-  private getArtical(id: string) {
-    this.$showLoading(true);
+  private getLife(id: string) {
+    this.$emit("showLoading", true);
     this.$http
-      .get(IPserver + "articals/getOneArtical.php", {
+      .get(IPserver + "lifes/getOneLife.php", {
         articalid: id
       })
       .then((res: any) => {
@@ -50,7 +57,7 @@ export default class articleDetails extends Vue {
 
   @Watch("$route")
   routeChange() {
-    this.getArtical(this.$route.params.id);
+    this.getLife(this.$route.params.id);
     document.documentElement.scrollTop = 0;
   }
 }

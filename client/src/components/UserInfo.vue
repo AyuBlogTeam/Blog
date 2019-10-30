@@ -16,17 +16,17 @@
         div.clear
       ul
         li(v-for="(item) in articleList",:key="item.articalid")
-          a(@click="toArticleDetail(item.title,item.articalid)") {{item.title | maxStrLen}}
+          a(@click="toArticleDetail(item.articalid)") {{item.title | maxStrLen}}
             div.underline
         div.clear
 </template>
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 @Component({
   filters: {
     maxStrLen: (item: string) => {
       if (item && item.length > 20) {
-        return item.substr(0, 30) + "...";
+        return item.substr(0, 20) + "...";
       } else {
         return item;
       }
@@ -36,22 +36,29 @@ import { Component, Vue } from "vue-property-decorator";
 export default class UserInfo extends Vue {
   private articleList: object[] = [];
 
+  @Prop()
+  currentComponent: string;
+
   mounted() {
     this.getArtical();
   }
 
-  private toArticleDetail(name: string, id: string) {
-    this.$emit("toArticleDetail", name, id);
+  private toArticleDetail(id: string) {
+    this.$emit("toArticleDetail", id);
   }
 
   private getArtical() {
-    this.$http
-      .get(IPserver + "articals/getArticalList.php")
-      .then((res: object[]) => {
-        if (res) {
-          this.articleList = res;
-        }
-      });
+    let url;
+    if (this.currentComponent == "life") {
+      url = IPserver + "lifes/getLifeList.php";
+    } else if (this.currentComponent == "article") {
+      url = IPserver + "articals/getArticalList.php";
+    }
+    this.$http.get(url).then((res: object[]) => {
+      if (res) {
+        this.articleList = res;
+      }
+    });
   }
 }
 </script>
@@ -152,6 +159,7 @@ export default class UserInfo extends Vue {
 
         a {
           transition: all 0.5s;
+          display: inline-block;
         }
       }
 

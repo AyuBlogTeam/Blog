@@ -6,14 +6,32 @@
           svg.icon(aria-hidden="true")
             use(xlink:href="#icon-yu1")
         span Ayu
-      ul.banner
-        li(:class="current==0?'active':''",@click="toRotate(0)") 首页
-          div.underline
-        li(:class="current==1?'active':''",@click="toRotate(1)") 文章
-          div.underline
-        li(:class="current==2?'active':''",@click="toRotate(2)") 生活
-          div.underline
-      a(@click="showFeedbackFun") 反馈
+      div.headMenu
+        ul.banner
+          li(:class="current==0?'active':''",@click="toRotate(0)") 首页
+            div.underline
+          li(:class="current==1?'active':''",@click="toRotate(1)") 文章
+            div.underline
+          li(:class="current==2?'active':''",@click="toRotate(2)") 生活
+            div.underline
+        a(@click="showFeedbackFun") 反馈
+      div.phone(@click="showPhoneMenu")
+        span
+          svg.icon(aria-hidden="true")
+            use(xlink:href="#icon-_caidan")
+      div.phoneMenu(v-if="phoneMenu")
+        div(@click="toRotate(0)")
+          svg.icon(aria-hidden="true")
+            use(xlink:href="#icon-shouye")
+        div(@click="toRotate(1)")
+          svg.icon(aria-hidden="true")
+            use(xlink:href="#icon-wenzhangchaxun")
+        div(@click="toRotate(2)")
+          svg.icon(aria-hidden="true")
+            use(xlink:href="#icon-shenghuo")
+        div(@click="showFeedbackFun")
+          svg.icon(aria-hidden="true")
+            use(xlink:href="#icon-fankuipingjia")
     div.progress(:style="'width:' + progressWidth + '%'")
     transition(name="fade")
       div.feedback(v-if="showFeedback")
@@ -37,17 +55,21 @@ export default class Header extends Vue {
   private current: number = 0;
   private feedback: string = "";
   private showFeedback: boolean = false;
+  private phoneMenu: boolean = false;
 
   mounted() {
     const pname = window.location.pathname;
     if (pname.indexOf("/article") != -1) {
       this.current = 1;
+    } else if (pname.indexOf("/life") != -1) {
+      this.current = 2;
     } else {
       this.current = 0;
     }
   }
 
   private toRotate(index: number) {
+    this.phoneMenu = false;
     this.current = index;
     switch (index) {
       case 0:
@@ -67,13 +89,11 @@ export default class Header extends Vue {
         });
         break;
       case 2:
-        this.$emit("showMessageFun", "warning", "这个模块还在开发哟");
-        return;
-        if (this.$route.name == "article") {
+        if (this.$route.name == "life") {
           return;
         }
         this.$router.push({
-          name: `article`
+          name: `life`
         });
         break;
       default:
@@ -82,13 +102,14 @@ export default class Header extends Vue {
   }
 
   private showFeedbackFun() {
+    this.phoneMenu = false;
     this.showFeedback = true;
     this.feedback = "";
   }
 
   private feedbackToSql() {
     if (this.feedback == "") {
-      this.$emit("showMessageFun", "warning", "请输入反馈内容");
+      this.$Message("请输入反馈内容", "warning");
       return;
     }
     this.$http
@@ -98,11 +119,15 @@ export default class Header extends Vue {
       })
       .then(res => {
         if (res) {
-          this.$emit("showMessageFun", "success", "反馈成功");
+          this.$Message("反馈成功", "success");
           this.feedback = "";
           this.showFeedback = false;
         }
       });
+  }
+
+  private showPhoneMenu() {
+    this.phoneMenu = !this.phoneMenu;
   }
 
   @Prop()
@@ -116,7 +141,8 @@ strong, em {
 }
 
 .allHeader {
-  position: sticky;
+  position: fixed;
+  width: 100%;
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
   top: 0;
@@ -157,6 +183,31 @@ strong, em {
 
       li.active {
         color: rgb(200, 200, 109);
+      }
+    }
+
+    .phone {
+      display: none;
+      float: right;
+      margin-top: 5px;
+
+      .icon {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .phoneMenu {
+      position: fixed;
+      float: right;
+      margin-top: 5px;
+      padding: 20px;
+      right: 0;
+      top: 37px;
+
+      .icon {
+        width: 40px;
+        height: 40px;
       }
     }
 
@@ -259,7 +310,6 @@ strong, em {
 
       .feedbackContent {
         padding: 20px;
-        width: 460px;
         height: 150px;
         overflow: hidden;
         border-bottom: 1px solid #e8eaec;

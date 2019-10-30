@@ -9,16 +9,12 @@ const list = (props)=>{
     return (
       <div className="oneArticle" key={index}>
         <h2 className="title fl" onClick={()=>props.toWrite(item.articalid)}>
-          {
-              item.title !== undefined?
-              <div dangerouslySetInnerHTML={{__html:item.title}}></div>:
-              <div dangerouslySetInnerHTML={{__html:item.content}}></div>
-          }
+          <div dangerouslySetInnerHTML={{__html:item.title}}></div>
           <div className="underline"></div>
         </h2>
         <div className="clear"></div>
         {
-            item.title !== undefined?
+            item.summary !== undefined?
             <Fragment>
                 <div className="richContent">
                     <div className="pic">

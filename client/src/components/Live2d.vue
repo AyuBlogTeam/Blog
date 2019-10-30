@@ -2,7 +2,7 @@
   div#live2d
     div.live2d-panel
       div.dialogue-live2d(ref="live2dDialogue",v-if="islive2d") {{word}}
-      live2d(v-if="islive2d" :width=300 :height=400 :modelPath="'/live2dw/live2d-widget-model-' + modelArr[5] + '.json'")
+      live2d(v-if="islive2d" :width=200 :height=300 :modelPath="'/live2dw/live2d-widget-model-' + modelArr[5] + '.json'")
 </template>
 <script lang='ts'>
 import { Component, Vue } from "vue-property-decorator";
@@ -79,7 +79,7 @@ export default class componentName extends Vue {
     font-weight: 1000;
     text-align: center;
     opacity: 1;
-    width: 250px;
+    width: 140px;
     height: auto;
     min-height: 60px;
     margin: 0 0 -25px 20px;

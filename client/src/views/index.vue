@@ -5,7 +5,7 @@
       div
         h1 深海之鱼
       div.search
-        input(type="text",placeholder="该网站还在开发哦，程序猿小哥哥非常乐意接收你们的意见哦~")
+        input(type="text",placeholder="该网站还在开发yo~")
         svg.icon(aria-hidden="true",@click="search")
           use(xlink:href="#icon-sousuo")
       div.poetry
@@ -34,7 +34,7 @@ export default class Index extends Vue {
   }
 
   private search() {
-    this.$emit("showMessageFun", "warning", "这个模块还在开发哟");
+    this.$Message("这个模块还在开发哟", "warning");
   }
 }
 </script>

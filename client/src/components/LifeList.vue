@@ -1,16 +1,23 @@
 <template lang="pug">
   div
-    div.oneArticle(v-for="item in articleList",:key="item.articalid")
-      h2.title.fl(@click="toArticleDetail(item.articalid)") {{item.title}}
-        div.underline
-      div.clear
-      div.richContent
-        div.pic
-          img(:src="item.coverimg")
-        div.info
-          p {{item.summary}}
-      div.footArticle
-        p.fl.grey {{item.kind}}
+    div.oneArticle(v-for="item in lifeList",:key="item.articalid")
+      div(v-if="item.summary")
+        h2.title.fl(@click="toLifeDetail(item.articalid)") {{item.title}}
+          div.underline
+        div.clear
+        div.richContent
+          div.pic
+            img(:src="item.coverimg")
+          div.info
+            p {{item.summary}}
+        div.footArticle
+          p.fl.grey {{item.kind}}
+          p.fr.grey {{item.time}}
+          p.clear
+      div(@click="toLifeDetail(item.articalid,item.content)",v-if="!item.summary")
+        h2.title.fl
+          div(v-html="item.title")
+        div.clear
         p.fr.grey {{item.time}}
         p.clear
 </template>
@@ -18,25 +25,39 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class IndexList extends Vue {
-  private articleList: object[] = [];
+  private lifeList: object[] = [];
 
   mounted() {
-    this.getArtical();
+    this.getLife();
   }
 
-  private toArticleDetail(id: string) {
-    this.$emit("toArticleDetail", id);
+  private toLifeDetail(id: string, content: string) {
+    this.$cookies.set("content", content);
+    this.$emit("toLifeDetail", id);
   }
 
-  private getArtical() {
+  private getLife() {
+    this.lifeList = [];
     this.$showLoading(true);
-    this.$http
-      .get(IPserver + "articals/getArtical.php")
-      .then((res: object[]) => {
-        if (res) {
-          this.articleList = res;
+    this.$http.get(IPserver + "lifes/getLife.php").then((res: object[]) => {
+      if (res) {
+        if (res.artical.length != 0) {
+          res.artical.map(item => {
+            this.lifeList.push(item);
+          });
         }
-      });
+        if (res.life.length != 0) {
+          res.life.map(item => {
+            if (item.content.length >= 30) {
+              item.title = item.content.substr(0, 30) + "...";
+            } else {
+              item.title = item.content;
+            }
+            this.lifeList.push(item);
+          });
+        }
+      }
+    });
   }
 }
 </script>
