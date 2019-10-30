@@ -48,8 +48,8 @@ export default class App extends Vue {
   private getInfo() {
     if (this.$cookies.get("ip") == null) {
       axios.get(IPserver + "ip/setIp.php").then(res => {
-        if (res.data != "") {
-          this.$cookies.set("ip", res.data,(60*60));
+        if (res.data.data != "") {
+          this.$cookies.set("ip", res.data.data,(60*60));
         }
       });
     }
