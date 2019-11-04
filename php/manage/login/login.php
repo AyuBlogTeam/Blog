@@ -11,7 +11,6 @@ $result=$conn->query($sql);
 if($result->num_rows>0){
   session_start();
   $_SESSION["JSESSIONID"]=$username;
-  // echo $_SESSION["JSESSIONID"];
   $returnResult = new Success();
   $returnResult->data = "登录成功";
 }else{

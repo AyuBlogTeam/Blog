@@ -5,7 +5,7 @@
       div
         h1 深海之鱼
       div.search
-        input(type="text",placeholder="该网站还在开发yo~")
+        input(type="text",placeholder="该网站还在开发yo~",v-model="searchContent")
         svg.icon(aria-hidden="true",@click="search")
           use(xlink:href="#icon-sousuo")
       div.poetry
@@ -25,16 +25,33 @@ import { Component, Vue } from "vue-property-decorator";
 export default class Index extends Vue {
   private time: string = "0";
   private username: string = "AYUPERSON.TOP";
+  private searchContent: string = "";
 
   mounted() {
     this.time = (
       (new Date().getTime() - new Date("2016-02-19").getTime()) /
       86400000
     ).toFixed();
+    document.addEventListener("keydown", this.keydown);
+  }
+
+  destroyed() {
+    document.removeEventListener("keydown", this.keydown);
+  }
+
+  private keydown(e) {
+    if (e.keyCode === 13) {
+      this.search();
+    }
   }
 
   private search() {
-    this.$Message("这个模块还在开发哟", "warning");
+    this.$router.push({
+      name: `search`,
+      params: {
+        search: this.searchContent
+      }
+    });
   }
 }
 </script>
@@ -59,7 +76,7 @@ export default class Index extends Vue {
     line-height: 100px;
     text-align: center;
     letter-spacing: 30px;
-    padding-left:30px;
+    padding-left: 30px;
     color: rgb(131, 175, 155);
   }
 

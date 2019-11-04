@@ -32,6 +32,9 @@
           div(@click="toRotate(2)")
             svg.icon(aria-hidden="true")
               use(xlink:href="#icon-shenghuo")
+          div(@click="toRotate(3)")
+            svg.icon(aria-hidden="true")
+              use(xlink:href="#icon-sousuo")
           div(@click="showFeedbackFun")
             svg.icon(aria-hidden="true")
               use(xlink:href="#icon-fankuipingjia")
@@ -61,6 +64,10 @@ export default class Header extends Vue {
   private phoneMenu: boolean = false;
 
   mounted() {
+    this.getPath();
+  }
+
+  private getPath() {
     const pname = window.location.pathname;
     if (pname.indexOf("/article") != -1) {
       this.current = 1;
@@ -145,6 +152,11 @@ export default class Header extends Vue {
 
   @Prop()
   progressWidth: number = 0;
+
+  @Watch("$route")
+  routeChange() {
+    this.getPath();
+  }
 }
 </script>
 
