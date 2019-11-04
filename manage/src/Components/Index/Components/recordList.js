@@ -31,6 +31,7 @@ class RecordList extends Component {
             item.title = item.content;
           }
           list.push(item);
+          return item;
         })
         this.setState({
           list: list

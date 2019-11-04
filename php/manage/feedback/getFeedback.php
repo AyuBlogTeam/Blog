@@ -10,7 +10,7 @@
       public $ip;
   }
 
-  $sql = "SELECT * FROM FEEDBACK limit $from,10";
+  $sql = "SELECT * FROM FEEDBACK order by id DESC limit $from,10";
 
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
