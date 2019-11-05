@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-const Loading = ()=>{
+const Loading = () => {
   return (
-    <div id="loading" className='loading'>
+    <div id="loading" className="loading">
       <div className="loader">
         <div className="track">
           <div className="mouse"></div>
@@ -21,7 +21,7 @@ const Loading = ()=>{
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Loading;

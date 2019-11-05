@@ -306,6 +306,7 @@ module.exports = function (webpackEnv) {
         'Images': path.resolve(__dirname, '../src/assets/Images'),
         'Common': path.resolve(__dirname, '../src/Common'),
         'Components': path.resolve(__dirname, '../src/Components'),
+        'store': path.resolve(__dirname, '../src/store'),
         // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',
