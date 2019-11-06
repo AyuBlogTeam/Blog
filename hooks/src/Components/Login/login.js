@@ -1,70 +1,48 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import LoginUi from "./loginUi.js";
 import axios from "axios";
 import { message } from "antd";
 import IPserver from "IPserver";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      yzm: "",
-      val: "",
-      username: "",
-      password: "",
-      loading: false
+const Login = props => {
+  const [yzm, setYzm] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    drow();
+    window.router = props.history;
+    document.addEventListener("keydown", keydown);
+    return () => {
+      document.removeEventListener("keydown", keydown);
     };
-    this.keydown = this.keydown.bind(this);
-  }
+  }, []);
 
-  componentDidMount() {
-    window.router = this.props.history;
-    this.drow();
-    document.addEventListener("keydown", this.keydown);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.keydown);
-  }
-
-  keydown(e) {
+  const keydown = e => {
     if (e.keyCode === 13) {
-      this.submit();
+      submit();
     }
-  }
+  };
 
-  change(e) {
-    this.setState({
-      [e.target.className]: e.target.value
-    });
-  }
-
-  submit() {
-    if (this.state.username === "" || this.state.password === "") {
+  const submit = (username, password, val) => {
+    if (username === "" || password === "") {
       message.error("用户名与密码不可留空");
       return;
     }
-    if (
-      this.state.yzm.toLocaleLowerCase() !== this.state.val.toLocaleLowerCase()
-    ) {
+    if (yzm.toLocaleLowerCase() !== val.toLocaleLowerCase()) {
       message.error("验证码错误");
       return;
     }
-    this.setState({
-      loading: true
-    });
+    setLoading(true);
     axios
       .post(IPserver + "login/login.php", {
-        username: this.state.username,
-        password: this.state.password
+        username: username,
+        password: password
       })
       .then(res => {
-        this.setState({
-          loading: false
-        });
+        setLoading(false);
         if (res.data.code === "200") {
           message.success("登录成功");
-          this.props.history.push("/");
+          props.history.push("/");
         } else if (res.data.code === "401") {
           message.error("账号或密码错误");
         } else {
@@ -73,16 +51,12 @@ class Login extends Component {
       })
       .catch(error => {
         message.error("请求失败，请联系管理员");
-        this.setState({
-          loading: false
-        });
+        setLoading(false);
       });
-  }
+  };
 
-  drow() {
-    this.setState({
-      yzm: ""
-    });
+  const drow = () => {
+    setYzm("");
     let canvas_width = "100";
     let canvas_height = "30";
     let canvas = document.getElementById("canvas"); //获取到canvas的对象，演员
@@ -108,7 +82,7 @@ class Login extends Component {
       context.translate(x, y);
       context.rotate(deg);
 
-      context.fillStyle = this.randomColor();
+      context.fillStyle = randomColor();
       context.fillText(txt, 0, 0);
 
       context.rotate(-deg);
@@ -116,7 +90,7 @@ class Login extends Component {
     }
     for (let i = 0; i <= 5; i++) {
       //验证码上显示线条
-      context.strokeStyle = this.randomColor();
+      context.strokeStyle = randomColor();
       context.beginPath();
       context.moveTo(
         Math.random() * canvas_width,
@@ -130,7 +104,7 @@ class Login extends Component {
     }
     for (let i = 0; i <= 30; i++) {
       //验证码上显示小点
-      context.strokeStyle = this.randomColor();
+      context.strokeStyle = randomColor();
       context.beginPath();
       let x = Math.random() * canvas_width;
       let y = Math.random() * canvas_height;
@@ -138,30 +112,21 @@ class Login extends Component {
       context.lineTo(x + 1, y + 1);
       context.stroke();
     }
-    this.setState({
-      yzm
-    });
-  }
+    setYzm(yzm);
+  };
 
-  randomColor() {
+  const randomColor = () => {
     var r = Math.floor(Math.random() * 256);
     var g = Math.floor(Math.random() * 256);
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + "," + g + "," + b + ")";
-  }
+  };
 
-  render() {
-    return (
-      <Fragment>
-        <LoginUi
-          all={this.state}
-          drow={this.drow.bind(this)}
-          submit={this.submit.bind(this)}
-          change={this.change.bind(this)}
-        />
-      </Fragment>
-    );
-  }
-}
+  return (
+    <>
+      <LoginUi loading={loading} drow={drow} submit={submit} />
+    </>
+  );
+};
 
 export default Login;
