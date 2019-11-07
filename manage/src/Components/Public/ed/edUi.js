@@ -55,7 +55,7 @@ class IndexUi extends Component {
                 placeholder="请输入概述"
                 value={articalSummary}
                 onChange={props.changeSummary}
-                autosize={{ minRows: 3, maxRows: 6 }}
+                autoSize={{ minRows: 3, maxRows: 6 }}
               />
             </div>
           </Fragment>

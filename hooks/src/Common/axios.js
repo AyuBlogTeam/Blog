@@ -1,7 +1,6 @@
+import React, { useContext } from "react";
 import axios from "axios";
 import { message } from "antd";
-import { setLoading } from "store/actionCreators";
-import store from "store";
 
 const $http = axios.create({});
 var count = 0;
@@ -34,8 +33,6 @@ const get = (url, params) => {
         if (count === 1) {
           message.error("请求失败，请联系管理员");
         }
-        const action = setLoading(false);
-        store.dispatch(action);
         reject(error);
       });
   });
@@ -67,8 +64,6 @@ const post = (url, params) => {
         if (count === 1) {
           message.error("请求失败，请联系管理员");
         }
-        const action = setLoading(false);
-        store.dispatch(action);
         reject(error);
       });
   });

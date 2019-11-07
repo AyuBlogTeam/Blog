@@ -9,7 +9,7 @@ const TableUi = props => {
     currentPage,
     selectedRowKeys,
     currentComponent
-  } = props.state;
+  } = props;
   const rowSelection = {
     selectedRowKeys,
     onChange: props.onSelectChange
