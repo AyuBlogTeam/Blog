@@ -11,7 +11,7 @@ import Index from "./Components/Index/index";
 import Login from "./Components/Login/login";
 
 export const App = () => (
-  <BrowserRouter basename="/manage">
+  <BrowserRouter basename="/hooks">
     <Switch>
       <Route path="/" exact component={Index} />
       <Route path="/login" exact component={Login} />

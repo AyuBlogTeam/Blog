@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import axios from "axios";
 import { message } from "antd";
 
@@ -32,7 +31,9 @@ const get = (url, params) => {
         count++;
         if (count === 1) {
           message.error("请求失败，请联系管理员");
+          count = 0;
         }
+        document.getElementById("loading").style.display = "none";
         reject(error);
       });
   });
@@ -63,7 +64,9 @@ const post = (url, params) => {
         count++;
         if (count === 1) {
           message.error("请求失败，请联系管理员");
+          count = 0;
         }
+        document.getElementById("loading").style.display = "none";
         reject(error);
       });
   });

@@ -19,7 +19,10 @@ import {
 
 const { confirm } = Modal;
 
-const Index = () => {
+const Index = props => {
+  useEffect(() => {
+    window.router = props.history;
+  }, []);
   return (
     <ReduxData>
       <IndexChildren />
@@ -27,7 +30,7 @@ const Index = () => {
   );
 };
 
-const IndexChildren = props => {
+const IndexChildren = () => {
   const { list, loading, writeBoo } = useContext(ReduxContext).state;
   const { dispatch } = useContext(ReduxContext);
   const [rightWidth, setRightWidth] = useState("calc(100% - 242px)");
@@ -44,10 +47,6 @@ const IndexChildren = props => {
     visible: false
   });
   const [live2dValue, setLive2dValue] = useState("");
-
-  useEffect(() => {
-    window.router = props.history;
-  }, []);
 
   useEffect(() => {
     if (
@@ -190,6 +189,8 @@ const IndexChildren = props => {
     });
   };
   const getTableInfo = (page = 1) => {
+    setTableData([]);
+    setTotal(0);
     let url;
     switch (currentComponent) {
       case "4":
@@ -375,7 +376,7 @@ const IndexChildren = props => {
       <div id="rightMain" style={{ width: rightWidth, left: rightLeft }}>
         {rightMain}
       </div>
-      {loading ? <Loading /> : null}
+      <Loading loading={loading} />
       <Modal
         title={modal.title}
         visible={modal.visible}
