@@ -1,8 +1,12 @@
 import React from "react";
 
-const Loading = () => {
+const Loading = props => {
   return (
-    <div id="loading" className="loading">
+    <div
+      style={{ display: !props.loading ? "none" : "block" }}
+      id="loading"
+      className="loading"
+    >
       <div className="loader">
         <div className="track">
           <div className="mouse"></div>

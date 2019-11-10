@@ -6,16 +6,21 @@ import IPserver from "IPserver";
 
 const Login = props => {
   const [yzm, setYzm] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [val, setVal] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     drow();
-    window.router = props.history;
-    document.addEventListener("keydown", keydown);
-    return () => {
-      document.removeEventListener("keydown", keydown);
-    };
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("keydown", keydown);
+    return () => {
+      window.removeEventListener("keydown", keydown);
+    };
+  }, [yzm, username, password, val]);
 
   const keydown = e => {
     if (e.keyCode === 13) {
@@ -23,7 +28,7 @@ const Login = props => {
     }
   };
 
-  const submit = (username, password, val) => {
+  const submit = () => {
     if (username === "" || password === "") {
       message.error("用户名与密码不可留空");
       return;
@@ -124,7 +129,14 @@ const Login = props => {
 
   return (
     <>
-      <LoginUi loading={loading} drow={drow} submit={submit} />
+      <LoginUi
+        drow={drow}
+        loading={loading}
+        submit={submit}
+        username={setUsername}
+        password={setPassword}
+        val={setVal}
+      />
     </>
   );
 };

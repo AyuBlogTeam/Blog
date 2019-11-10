@@ -1,12 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 import Particles from "reactparticles.js";
 import { Button } from "antd";
 
 const LoginUi = props => {
-  const val = useRef(null);
-  const username = useRef(null);
-  const password = useRef(null);
-  const { loading } = props;
+  const { loading, username, password, val } = props;
   return (
     <div id="loginUI">
       <div className="header">阿鱼的研发日志</div>
@@ -17,11 +14,23 @@ const LoginUi = props => {
         <div className="title">管理员登录</div>
         <div className="yz">
           <span className="iconfont">&#xe613;</span>
-          <input className="username" type="text" ref={username} />
+          <input
+            className="username"
+            type="text"
+            onChange={e => {
+              username(e.target.value);
+            }}
+          />
         </div>
         <div className="yz">
           <span className="iconfont">&#xe619;</span>
-          <input className="password" type="password" ref={password} />
+          <input
+            className="password"
+            type="password"
+            onChange={e => {
+              password(e.target.value);
+            }}
+          />
         </div>
         <div className="yz">
           <span className="iconfont">&#xe667;</span>
@@ -32,20 +41,16 @@ const LoginUi = props => {
             width="100"
             height="30"
           ></canvas>
-          <input type="text" className="val" ref={val} />
+          <input
+            type="text"
+            className="val"
+            onChange={e => {
+              val(e.target.value);
+            }}
+          />
         </div>
         <div className="btn">
-          <Button
-            type="primary"
-            loading={loading}
-            onClick={() =>
-              props.submit(
-                username.current.value,
-                password.current.value,
-                val.current.value
-              )
-            }
-          >
+          <Button type="primary" loading={loading} onClick={props.submit}>
             登录
           </Button>
         </div>

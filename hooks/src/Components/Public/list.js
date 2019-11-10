@@ -1,28 +1,27 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Button } from "antd";
 
-import {
-  setCurrentId,
-  setCurrentType,
-  setWriteBoo
-} from "store/actionCreators";
-import { connect } from "react-redux";
+import { setCurrentId, setCurrentType, setWriteBoo } from "../store/store";
 
 const list = props => {
-  const { list, current } = props;
+  const { list, current, dispatch } = props;
   const divlist = list.map((item, index) => {
     return (
       <div className="oneArticle" key={index}>
         <h2
           className="title fl"
-          onClick={() => props.setCurrentId(item.articalid, current)}
+          onClick={() => {
+            dispatch(setCurrentId(item.articalid));
+            dispatch(setCurrentType(current));
+            dispatch(setWriteBoo(true));
+          }}
         >
           <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
           <div className="underline"></div>
         </h2>
         <div className="clear"></div>
         {item.summary !== undefined ? (
-          <Fragment>
+          <React.Fragment>
             <div className="richContent">
               <div className="pic">
                 <img alt="" src={item.coverimg} />
@@ -38,12 +37,12 @@ const list = props => {
               <p className="fr grey">{item.time}</p>
               <p className="clear"></p>
             </div>
-          </Fragment>
+          </React.Fragment>
         ) : (
-          <Fragment>
+          <React.Fragment>
             <p className="fr grey">{item.time}</p>
             <p className="clear"></p>
-          </Fragment>
+          </React.Fragment>
         )}
       </div>
     );
@@ -52,7 +51,11 @@ const list = props => {
     <div id="ArticalList">
       <Button
         className="fr mb10"
-        onClick={() => props.setCurrentId(null, current)}
+        onClick={() => {
+          dispatch(setCurrentId(null));
+          dispatch(setCurrentType(current));
+          dispatch(setWriteBoo(true));
+        }}
       >
         新增
       </Button>
@@ -62,20 +65,4 @@ const list = props => {
   );
 };
 
-const dispatchToProps = dispatch => {
-  return {
-    setCurrentId(id, type) {
-      const idAction = setCurrentId(id);
-      dispatch(idAction);
-      const typeAction = setCurrentType(type);
-      dispatch(typeAction);
-      const writeBoo = setWriteBoo(true);
-      dispatch(writeBoo);
-    }
-  };
-};
-
-export default connect(
-  null,
-  dispatchToProps
-)(list);
+export default list;

@@ -1,7 +1,5 @@
 import axios from "axios";
 import { message } from "antd";
-import { setLoading } from "store/actionCreators";
-import store from "store";
 
 const $http = axios.create({});
 var count = 0;
@@ -33,9 +31,9 @@ const get = (url, params) => {
         count++;
         if (count === 1) {
           message.error("请求失败，请联系管理员");
+          count = 0;
         }
-        const action = setLoading(false);
-        store.dispatch(action);
+        document.getElementById("loading").style.display = "none";
         reject(error);
       });
   });
@@ -66,9 +64,9 @@ const post = (url, params) => {
         count++;
         if (count === 1) {
           message.error("请求失败，请联系管理员");
+          count = 0;
         }
-        const action = setLoading(false);
-        store.dispatch(action);
+        document.getElementById("loading").style.display = "none";
         reject(error);
       });
   });
