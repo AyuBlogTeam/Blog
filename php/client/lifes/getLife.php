@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
         $returnResult->data->artical[] = $data;
     }
 }else{
-  $returnResult->data->artical[] = array();
+  $returnResult->data->artical = array();
 }
 if ($result1->num_rows > 0) {
     // 输出数据
@@ -50,7 +50,7 @@ if ($result1->num_rows > 0) {
         $returnResult->data->life[] = $data;
     }
 }else{
-  $returnResult->data->life[] = array();
+  $returnResult->data->life = array();
 }
 echo json_encode($returnResult);
 ?>

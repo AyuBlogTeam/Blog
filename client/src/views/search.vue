@@ -20,7 +20,7 @@
             p.fl.grey {{item.kind}}
             p.fr.grey {{item.time}}
             p.clear
-        div(@click="toLifeDetail(item.articalid,item.label,item.content)",v-if="!item.summary")
+        div(v-if="!item.summary")
           h2.title.fl
             div(v-html="item.title")
           div.clear
@@ -58,7 +58,7 @@ export default class Index extends Vue {
     }
   }
 
-  private toLifeDetail(id: string, label: string, content: string) {
+  private toLifeDetail(id: string, label: string) {
     switch (label) {
       case "artical":
         this.$router.push({
@@ -75,15 +75,6 @@ export default class Index extends Vue {
             id: id
           }
         });
-        break;
-      case "record":
-        this.$router.push({
-          name: `lifeDetails`,
-          params: {
-            id: id
-          }
-        });
-        this.$cookies.set("content", content);
         break;
       default:
         break;

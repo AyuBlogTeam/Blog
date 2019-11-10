@@ -20,14 +20,7 @@ export default class lifeDetails extends Vue {
 
   mounted() {
     document.documentElement.scrollTop = 0;
-    if (
-      this.$cookies.get("content") != null &&
-      this.$cookies.get("content") != "undefined"
-    ) {
-      this.content = this.$cookies.get("content");
-    } else {
-      this.getLife(this.$route.params.id);
-    }
+    this.getLife(this.$route.params.id);
   }
 
   private toLifeDetail(id: string) {

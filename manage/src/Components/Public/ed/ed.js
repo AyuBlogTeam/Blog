@@ -17,7 +17,7 @@ function getBase64(file) {
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
   });
-}
+  }
 
 class Write extends Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class Write extends Component {
       previewImage: "",
       fileList: [],
       articalTitle: "",
+      musicCode: "",
       articalSummary: "",
       articalKind: "React",
       selectList: [
@@ -201,6 +202,12 @@ class Write extends Component {
     });
   }
 
+  changeMusicCode(e){
+    this.setState({
+      musicCode: e.target.value
+    });
+  }
+
   delete() {
     let that = this;
     let url;
@@ -335,6 +342,7 @@ class Write extends Component {
           changeTitle={this.changeTitle.bind(this)}
           changeSummary={this.changeSummary.bind(this)}
           changeKind={this.changeKind.bind(this)}
+          changeMusicCode={this.changeMusicCode.bind(this)}
           cancel={() => this.props.setWriteBoo(this.props.currentType)}
           delete={this.delete.bind(this)}
         />

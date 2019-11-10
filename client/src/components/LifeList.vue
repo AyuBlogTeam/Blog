@@ -14,9 +14,9 @@
           p.fl.grey {{item.kind}}
           p.fr.grey {{item.time}}
           p.clear
-      div(@click="toLifeDetail(item.articalid,item.content)",v-if="!item.summary")
-        h2.title.fl
-          div(v-html="item.title")
+      div(v-if="!item.summary")
+        h2.title.fl(style="width:100%")
+          div(v-html="str")
         div.clear
         p.fr.grey {{item.time}}
         p.clear
@@ -26,13 +26,13 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class IndexList extends Vue {
   private lifeList: object[] = [];
+  private str:string = '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=86 src="//music.163.com/outchain/player?type=3&id=2062817709&auto=0&height=66"></iframe>'
 
   mounted() {
     this.getLife();
   }
 
-  private toLifeDetail(id: string, content: string) {
-    this.$cookies.set("content", content);
+  private toLifeDetail(id: string) {
     this.$emit("toLifeDetail", id);
   }
 
@@ -48,11 +48,6 @@ export default class IndexList extends Vue {
         }
         if (res.life.length != 0) {
           res.life.map(item => {
-            if (item.content.length >= 30) {
-              item.title = item.content.substr(0, 30) + "...";
-            } else {
-              item.title = item.content;
-            }
             this.lifeList.push(item);
           });
         }

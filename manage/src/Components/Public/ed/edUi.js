@@ -17,7 +17,8 @@ class IndexUi extends Component {
       articalSummary,
       articalKind,
       selectList,
-      articalId
+      articalId,
+      musicCode
     } = props.state;
     const uploadButton = (
       <div>
@@ -55,7 +56,19 @@ class IndexUi extends Component {
                 placeholder="请输入概述"
                 value={articalSummary}
                 onChange={props.changeSummary}
-                autosize={{ minRows: 3, maxRows: 6 }}
+                autoSize={{ minRows: 3, maxRows: 6 }}
+              />
+            </div>
+          </Fragment>
+        ) : null}
+        {props.currentType === "3" ? (
+          <Fragment>
+            <div className="input">
+              <Input.TextArea
+                placeholder="请输入分享的音乐代码"
+                value={musicCode}
+                onChange={props.changeMusicCode}
+                autoSize={{ minRows: 3, maxRows: 6 }}
               />
             </div>
           </Fragment>
