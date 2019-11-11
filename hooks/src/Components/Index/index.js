@@ -180,6 +180,7 @@ const IndexChildren = () => {
             message.success("删除成功");
             getTableInfo();
             setCurrentPage(1);
+            setSelectedRowKeys([]);
           }
         });
       },

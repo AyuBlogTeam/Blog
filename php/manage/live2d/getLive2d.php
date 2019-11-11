@@ -6,9 +6,11 @@
   class Visitor{
       public $key;
       public $content;
+      public $ip;
+      public $author;
   }
 
-  $sql = "SELECT * FROM LIVE2D limit $from,10";
+  $sql = "SELECT * FROM LIVE2D order by id DESC limit $from,10";
 
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
@@ -18,6 +20,8 @@
           $data = new Visitor();
           $data->key = $row["id"];
           $data->content = $row["content"];
+          $data->ip = $row["ip"];
+          $data->author = $row["author"];
           $returnResult->data->data[] = $data;
       }
       $sql1 = "SELECT COUNT(*) AS count FROM LIVE2D";

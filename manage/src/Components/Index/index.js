@@ -176,7 +176,8 @@ class Index extends Component {
             message.success("删除成功");
             that.getTableInfo();
             that.setState({
-              currentPage: 1
+              currentPage: 1,
+              selectedRowKeys: []
             });
           }
         });
@@ -258,6 +259,18 @@ class Index extends Component {
               title: "内容",
               dataIndex: "content",
               key: "content",
+              align: "center"
+            },
+            {
+              title: "作者",
+              dataIndex: "author",
+              key: "author",
+              align: "center"
+            },
+            {
+              title: "IP",
+              dataIndex: "ip",
+              key: "ip",
               align: "center"
             },
             {
