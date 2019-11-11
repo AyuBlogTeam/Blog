@@ -6,6 +6,7 @@ const Life = () => import("@/views/life.vue");
 const LifeDetails = () => import("@/views/lifeDetail.vue");
 const HomePage = () => import("@/views/index.vue");
 const Search = () => import("@/views/search.vue");
+const Word = () => import("@/views/word.vue");
 
 Vue.use(Router);
 
@@ -42,6 +43,11 @@ export default new Router({
       path: "/search",
       name: "search",
       component: Search
+    },
+    {
+      path: "/word",
+      name: "word",
+      component: Word
     }
   ]
 });

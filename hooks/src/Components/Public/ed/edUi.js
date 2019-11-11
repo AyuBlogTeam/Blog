@@ -23,7 +23,11 @@ const IndexUi = () => {
     changeSummary,
     changeKind,
     cancel,
-    deleteOne
+    deleteOne,
+    musicCode,
+    changeMusicCode,
+    isMusic,
+    changeType
   } = useContext(WriteContext);
   const uploadButton = (
     <div>
@@ -67,6 +71,18 @@ const IndexUi = () => {
           </div>
         </React.Fragment>
       ) : null}
+      {isMusic ? (
+        <React.Fragment>
+          <div className="input">
+            <Input.TextArea
+              placeholder="请输入分享的音乐代码"
+              value={musicCode}
+              onChange={changeMusicCode}
+              autoSize={{ minRows: 3, maxRows: 6 }}
+            />
+          </div>
+        </React.Fragment>
+      ) : null}
       {currentType !== "3" ? (
         <React.Fragment>
           <div className="input">
@@ -89,7 +105,9 @@ const IndexUi = () => {
           </div>
         </React.Fragment>
       ) : null}
-      <div className="input" ref={editElem} style={{ textAlign: "left" }} />
+      {!isMusic ? (
+        <div className="input" ref={editElem} style={{ textAlign: "left" }} />
+      ) : null}
       {currentType === "1" ? (
         <React.Fragment>
           <div className="input">
@@ -120,6 +138,13 @@ const IndexUi = () => {
           <Button className="submit" type="primary" onClick={submit}>
             发布
           </Button>
+          {currentType === "3" ? (
+            <React.Fragment>
+              <Button className="cancel" onClick={changeType}>
+                切换
+              </Button>
+            </React.Fragment>
+          ) : null}
           <Button className="cancel" onClick={cancel}>
             取消
           </Button>

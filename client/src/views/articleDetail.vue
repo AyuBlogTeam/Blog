@@ -1,7 +1,7 @@
 <template lang="pug">
   main.main
-    div.w70(style="background:#fff;")
-      div.content(v-html="content")
+    div.w70.content(style="background:#fff;")
+      div.htmlContent(v-html="content")
     div.infoCard
       IndexUserInfo(@toArticleDetail="toArticleDetail",:currentComponent="'article'")
     div.clear
@@ -56,7 +56,7 @@ export default class articleDetails extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.content >>> blockquote {
+.htmlContent >>> blockquote {
   display: block;
   border-left: 8px solid #d0e5f2;
   padding: 5px 10px;
@@ -65,10 +65,12 @@ export default class articleDetails extends Vue {
   font-size: 100%;
   background-color: #f1f1f1;
 }
-.content >>> pre{
+
+.htmlContent >>> pre {
   white-space: inherit;
 }
-.content {
+
+.htmlContent {
   background: #fff;
   padding: 20px;
   margin-bottom: 20px;

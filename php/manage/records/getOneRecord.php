@@ -5,6 +5,7 @@ class Artical{
     public $id;
     public $articalid;
     public $time;
+    public $ismusic;
     public $content;
 }
 
@@ -22,6 +23,7 @@ if ($result->num_rows > 0) {
         $data->content = htmlspecialchars_decode($row["content"]);
         $data->articalid = $row["articalid"];
         $data->time = $row["sendtime"];
+        $data->ismusic = $row["isMusic"]=="1"?true:false;
         $returnResult->data = $data;
     }
 }else{

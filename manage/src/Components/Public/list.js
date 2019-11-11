@@ -17,7 +17,11 @@ const list = props => {
           className="title fl"
           onClick={() => props.setCurrentId(item.articalid, current)}
         >
-          <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
+          {item.ismusic ? (
+            <div>{item.title}</div>
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
+          )}
           <div className="underline"></div>
         </h2>
         <div className="clear"></div>

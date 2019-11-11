@@ -16,6 +16,7 @@ class Life{
   public $content;
   public $articalid;
   public $time;
+  public $ismusic;
 }
 
 $returnResult = new Success();
@@ -47,6 +48,7 @@ if ($result1->num_rows > 0) {
         $data->content = htmlspecialchars_decode($row1["content"]);
         $data->articalid = $row1["articalid"];
         $data->time = $row1["sendtime"];
+        $data->ismusic = $row1["isMusic"]=="1"?true:false;
         $returnResult->data->life[] = $data;
     }
 }else{

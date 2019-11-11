@@ -1,7 +1,7 @@
 <template lang="pug">
   main.main
-    div.w70(style="background:#fff;")
-      div.content(v-html="content")
+    div.w70.content(style="background:#fff;")
+      div.htmlContent(v-html="content")
     div.infoCard
       IndexUserInfo(@toArticleDetail="toLifeDetail",:currentComponent="'life'")
     div.clear
@@ -20,7 +20,14 @@ export default class lifeDetails extends Vue {
 
   mounted() {
     document.documentElement.scrollTop = 0;
-    this.getLife(this.$route.params.id);
+    if (
+      this.$cookies.get("content") != null &&
+      this.$cookies.get("content") != "undefined"
+    ) {
+      this.content = this.$cookies.get("content");
+    } else {
+      this.getLife(this.$route.params.id);
+    }
   }
 
   private toLifeDetail(id: string) {
@@ -56,7 +63,7 @@ export default class lifeDetails extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.content >>> blockquote {
+.htmlContent >>> blockquote {
   display: block;
   border-left: 8px solid #d0e5f2;
   padding: 5px 10px;
@@ -66,14 +73,16 @@ export default class lifeDetails extends Vue {
   background-color: #f1f1f1;
 }
 
-.content {
+.htmlContent {
   background: #fff;
   padding: 20px;
   margin-bottom: 20px;
 }
-.content >>> pre{
+
+.htmlContent >>> pre {
   white-space: inherit;
 }
+
 .main {
   display: flex;
 }

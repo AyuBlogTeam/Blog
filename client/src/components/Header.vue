@@ -16,6 +16,8 @@
             div.underline
           li(:class="current==3?'active':''",@click="toRotate(3)") 搜索
             div.underline
+          li(:class="current==4?'active':''",@click="toRotate(4)") 句子
+            div.underline
         a(@click="showFeedbackFun") 反馈
       div.phone(@click="showPhoneMenu")
         span
@@ -75,6 +77,8 @@ export default class Header extends Vue {
       this.current = 2;
     } else if (pname.indexOf("/search") != -1) {
       this.current = 3;
+    } else if (pname.indexOf("/word") != -1) {
+      this.current = 4;
     } else {
       this.current = 0;
     }
@@ -114,6 +118,14 @@ export default class Header extends Vue {
         }
         this.$router.push({
           name: `search`
+        });
+        break;
+      case 4:
+        if (this.$route.name == "word") {
+          return;
+        }
+        this.$router.push({
+          name: `word`
         });
         break;
       default:

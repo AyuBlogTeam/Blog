@@ -2,11 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Button, Input, Upload, Modal, Icon, Select } from "antd";
 import IPserver from "IPserver";
 class IndexUi extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     const props = this.props;
     const {
@@ -18,7 +13,8 @@ class IndexUi extends Component {
       articalKind,
       selectList,
       articalId,
-      musicCode
+      musicCode,
+      isMusic
     } = props.state;
     const uploadButton = (
       <div>
@@ -61,7 +57,7 @@ class IndexUi extends Component {
             </div>
           </Fragment>
         ) : null}
-        {props.currentType === "3" ? (
+        {isMusic ? (
           <Fragment>
             <div className="input">
               <Input.TextArea
@@ -99,11 +95,13 @@ class IndexUi extends Component {
             </div>
           </Fragment>
         ) : null}
-        <div
-          className="input"
-          ref={r => (this.editorElem = r)}
-          style={{ textAlign: "left" }}
-        />
+        {!isMusic ? (
+          <div
+            className="input"
+            ref={r => (this.editorElem = r)}
+            style={{ textAlign: "left" }}
+          />
+        ) : null}
         {props.currentType === "1" ? (
           <Fragment>
             <div className="input">
@@ -134,6 +132,13 @@ class IndexUi extends Component {
             <Button className="submit" type="primary" onClick={props.submit}>
               发布
             </Button>
+            {props.currentType === "3" ? (
+              <Fragment>
+                <Button className="cancel" onClick={props.changeType}>
+                  切换
+                </Button>
+              </Fragment>
+            ) : null}
             <Button className="cancel" onClick={props.cancel}>
               取消
             </Button>

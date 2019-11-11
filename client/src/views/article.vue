@@ -1,6 +1,6 @@
 <template lang="pug">
   div.main
-    div.w70
+    div.w70.content
       ArticleList(
         @toArticleDetail="toArticleDetail")
     div.infoCard

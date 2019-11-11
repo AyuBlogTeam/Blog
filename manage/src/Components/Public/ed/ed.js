@@ -17,7 +17,7 @@ function getBase64(file) {
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
   });
-  }
+}
 
 class Write extends Component {
   constructor(props) {
@@ -42,7 +42,8 @@ class Write extends Component {
         "TypeScript",
         "杂七杂八"
       ],
-      articalId: ""
+      articalId: "",
+      isMusic: false
     };
   }
 
@@ -103,10 +104,20 @@ class Write extends Component {
           get(IPserver + "records/getOneRecord.php", {
             articalid: this.props.currentId
           }).then(res => {
+            if (res.ismusic) {
+              this.setState({
+                musicCode: res.content,
+                isMusic: true
+              });
+            } else {
+              this.setState({
+                isMusic: false
+              });
+              this.editor.txt.html(res.content);
+            }
             this.setState({
               articalId: this.props.currentId
             });
-            this.editor.txt.html(res.content);
             this.props.setLoading(false);
           });
           break;
@@ -202,7 +213,20 @@ class Write extends Component {
     });
   }
 
-  changeMusicCode(e){
+  changeType() {
+    this.setState(
+      {
+        isMusic: !this.state.isMusic
+      },
+      () => {
+        if (!this.state.isMusic) {
+          this.initEditor();
+        }
+      }
+    );
+  }
+
+  changeMusicCode(e) {
     this.setState({
       musicCode: e.target.value
     });
@@ -302,16 +326,30 @@ class Write extends Component {
         };
         break;
       case "3":
-        if (this.editor.txt.html() === "<p><br></p>") {
-          message.warn("请输入文章内容");
-          return;
+        if (this.state.isMusic) {
+          if (this.state.musicCode === "") {
+            message.warn("请输入代码");
+            return;
+          }
+          data = {
+            articalId: this.state.articalId,
+            content: this.state.musicCode,
+            ismusic: true,
+            username: this.props.username
+          };
+        } else {
+          if (this.editor.txt.html() === "<p><br></p>") {
+            message.warn("请输入文章内容");
+            return;
+          }
+          data = {
+            articalId: this.state.articalId,
+            content: this.editor.txt.html(),
+            ismusic: false,
+            username: this.props.username
+          };
         }
         url = IPserver + "records/operationRecord.php";
-        data = {
-          articalId: this.state.articalId,
-          content: this.editor.txt.html(),
-          username: this.props.username
-        };
         break;
       default:
         break;
@@ -337,6 +375,7 @@ class Write extends Component {
           state={this.state}
           currentType={this.props.currentType}
           handleChange={this.handleChange.bind(this)}
+          changeType={this.changeType.bind(this)}
           handleCancel={this.handleCancel.bind(this)}
           handlePreview={this.handlePreview.bind(this)}
           changeTitle={this.changeTitle.bind(this)}

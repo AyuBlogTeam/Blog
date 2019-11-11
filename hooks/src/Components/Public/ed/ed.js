@@ -51,6 +51,8 @@ const Write = props => {
     "杂七杂八"
   ]);
   const [articalId, setArticalId] = useState("");
+  const [isMusic, setIsMusic] = useState(false);
+  const [musicCode, setMusicCode] = useState("");
   const editElem = useRef(null);
 
   const handleCancel = () => {
@@ -69,51 +71,59 @@ const Write = props => {
   };
 
   useEffect(() => {
-    initEditor();
-    if (currentId !== null) {
-      dispatch(setLoading(true));
-      switch (currentType) {
-        case "1":
-          get(IPserver + "articals/getOneArtical.php", {
-            articalid: currentId
-          }).then(res => {
-            setArticalTitle(res.title);
-            setArticalSummary(res.summary);
-            setArticalId(currentId);
-            editor.txt.html(res.content);
-            dispatch(setLoading(false));
-          });
-          break;
-        case "2":
-          get(IPserver + "journals/getOneJournal.php", {
-            articalid: currentId
-          }).then(res => {
-            setArticalTitle(res.title);
-            setArticalSummary(res.summary);
-            setArticalId(currentId);
-            editor.txt.html(res.content);
-            dispatch(setLoading(false));
-          });
-          break;
-        case "3":
-          get(IPserver + "records/getOneRecord.php", {
-            articalid: currentId
-          }).then(res => {
-            setArticalId(currentId);
-            editor.txt.html(res.content);
-            dispatch(setLoading(false));
-          });
-          break;
-        default:
-          break;
+    if (!isMusic) {
+      initEditor();
+      if (currentId !== null) {
+        dispatch(setLoading(true));
+        switch (currentType) {
+          case "1":
+            get(IPserver + "articals/getOneArtical.php", {
+              articalid: currentId
+            }).then(res => {
+              setArticalTitle(res.title);
+              setArticalSummary(res.summary);
+              setArticalId(currentId);
+              editor.txt.html(res.content);
+              dispatch(setLoading(false));
+            });
+            break;
+          case "2":
+            get(IPserver + "journals/getOneJournal.php", {
+              articalid: currentId
+            }).then(res => {
+              setArticalTitle(res.title);
+              setArticalSummary(res.summary);
+              setArticalId(currentId);
+              editor.txt.html(res.content);
+              dispatch(setLoading(false));
+            });
+            break;
+          case "3":
+            get(IPserver + "records/getOneRecord.php", {
+              articalid: currentId
+            }).then(res => {
+              if (res.ismusic) {
+                setIsMusic(true);
+                setMusicCode(res.content);
+              } else {
+                setIsMusic(false);
+                editor.txt.html(res.content);
+              }
+              setArticalId(currentId);
+              dispatch(setLoading(false));
+            });
+            break;
+          default:
+            break;
+        }
+      } else {
+        setArticalTitle("");
+        setArticalSummary("");
+        setArticalId("");
+        editor.txt.html("");
       }
-    } else {
-      setArticalTitle("");
-      setArticalSummary("");
-      setArticalId("");
-      editor.txt.html("");
     }
-  }, []);
+  }, [isMusic]);
 
   const initEditor = () => {
     const elem = editElem.current;
@@ -271,16 +281,30 @@ const Write = props => {
         };
         break;
       case "3":
-        if (editor.txt.html() === "<p><br></p>") {
-          message.warn("请输入文章内容");
-          return;
+        if (isMusic) {
+          if (musicCode === "") {
+            message.warn("请输入代码");
+            return;
+          }
+          data = {
+            articalId: articalId,
+            content: musicCode,
+            ismusic: true,
+            username: props.username
+          };
+        } else {
+          if (editor.txt.html() === "<p><br></p>") {
+            message.warn("请输入文章内容");
+            return;
+          }
+          data = {
+            articalId: articalId,
+            content: editor.txt.html(),
+            ismusic: false,
+            username: props.username
+          };
         }
         url = IPserver + "records/operationRecord.php";
-        data = {
-          articalId: articalId,
-          content: editor.txt.html(),
-          username: props.username
-        };
         break;
       default:
         break;
@@ -316,6 +340,8 @@ const Write = props => {
         handleCancel,
         handlePreview,
         count,
+        musicCode,
+        isMusic,
         changeTitle: e => {
           setArticalTitle(e.target.value);
         },
@@ -324,6 +350,14 @@ const Write = props => {
         },
         changeKind: e => {
           setArticalKind(e.target.value);
+        },
+        changeMusicCode: e => {
+          setMusicCode(e.target.value);
+        },
+        changeType: () => {
+          setIsMusic(boo => {
+            return !boo;
+          });
         },
         cancel: () => {
           dispatch(setWriteBoo(false));

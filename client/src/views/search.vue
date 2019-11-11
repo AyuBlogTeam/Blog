@@ -1,35 +1,36 @@
 <template lang="pug">
   div.main
-    div.search
-      div
-        input(type="text",placeholder="请输入您的搜索内容",v-model="searchContent")
-        svg.icon(aria-hidden="true",@click="search")
-          use(xlink:href="#icon-sousuo")
-    div.list(v-if="searchResult.length!=0")
-      div.oneArticle(v-for="item in searchResult",:key="item.articalid")
-        div(v-if="item.summary")
-          h2.title.fl(@click="toLifeDetail(item.articalid,item.label)") {{item.title}}
-            div.underline
-          div.clear
-          div.richContent
-            div.pic
-              img(:src="item.coverimg")
-            div.info
-              p {{item.summary}}
-          div.footArticle
-            p.fl.grey {{item.kind}}
+    div.content
+      div.search
+        div
+          input(type="text",placeholder="请输入您的搜索内容",v-model="searchContent")
+          svg.icon(aria-hidden="true",@click="search")
+            use(xlink:href="#icon-sousuo")
+      div.list(v-if="searchResult.length!=0")
+        div.oneArticle(v-for="item in searchResult",:key="item.articalid")
+          div(v-if="item.summary")
+            h2.title.fl(@click="toLifeDetail(item.articalid,item.label)") {{item.title}}
+              div.underline
+            div.clear
+            div.richContent
+              div.pic
+                img(:src="item.coverimg")
+              div.info
+                p {{item.summary}}
+            div.footArticle
+              p.fl.grey {{item.kind}}
+              p.fr.grey {{item.time}}
+              p.clear
+          div(@click="toLifeDetail(item.articalid,item.label,item.content)",v-if="!item.summary")
+            h2.title.fl
+              div(v-html="item.title")
+            div.clear
             p.fr.grey {{item.time}}
             p.clear
-        div(v-if="!item.summary")
-          h2.title.fl
-            div(v-html="item.title")
-          div.clear
-          p.fr.grey {{item.time}}
-          p.clear
-    div.noresult(v-if="noResult")
-      svg.icon(aria-hidden="true")
-        use(xlink:href="#icon-meiyousousuojieguo")
-      p 没有找到您的搜索内容
+      div.noresult(v-if="noResult")
+        svg.icon(aria-hidden="true")
+          use(xlink:href="#icon-meiyousousuojieguo")
+        p 没有找到您的搜索内容
 </template>
 
 <script lang="ts">
@@ -58,7 +59,7 @@ export default class Index extends Vue {
     }
   }
 
-  private toLifeDetail(id: string, label: string) {
+  private toLifeDetail(id: string, label: string, content: string) {
     switch (label) {
       case "artical":
         this.$router.push({
@@ -75,6 +76,15 @@ export default class Index extends Vue {
             id: id
           }
         });
+        break;
+      case "record":
+        this.$router.push({
+          name: `lifeDetails`,
+          params: {
+            id: id
+          }
+        });
+        this.$cookies.set("content", content);
         break;
       default:
         break;
@@ -117,10 +127,11 @@ export default class Index extends Vue {
 <style lang="stylus" scoped>
 .main {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: calc(100vh - 87px);
-  background: #fff;
+
+  .content {
+    width: 100%;
+    background: #fff;
+  }
 
   .search {
     background: #fff;
@@ -138,11 +149,16 @@ export default class Index extends Vue {
       input {
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.1);
         color: #999;
-        border: none;
-        outline: none;
+        border-radius: 4px;
+        border: 1px solid #d9d9d9;
         padding: 0 0 0 10px;
+        transition: all 0.3s;
+      }
+
+      input:hover, input:focus {
+        border-color: #40a9ff;
+        border-right-width: 1px !important;
       }
 
       svg {
