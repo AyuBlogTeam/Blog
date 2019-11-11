@@ -1,7 +1,7 @@
 <template lang='pug'>
   transition(name="move")
     div.message(v-if="isShow")
-      div.content 
+      div.msgContent 
         svg.icon(aria-hidden="true")
           use(xlink:href="#icon-jinggao",v-if="type=='warning'")
           use(xlink:href="#icon-chenggong",v-if="type=='success'")
@@ -19,7 +19,7 @@
   text-align: center;
   font-size: 14px;
 
-  .content {
+  .msgContent {
     background: #fff;
     padding: 8px 16px;
     display: inline-block;

@@ -47,7 +47,7 @@ export default class componentName extends Vue {
     this.$http.get(IPserver + "live2d/getLive2d.php").then((res: string[]) => {
       if (res) {
         this.wordList = res;
-        this.islive2d = true
+        this.islive2d = true;
       }
     });
   }
@@ -90,7 +90,7 @@ export default class componentName extends Vue {
     font-size: 13px;
     color: #212121;
     text-overflow: ellipsis;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
     overflow: hidden;
     -webkit-animation: animation 50s ease-in-out 5s infinite;
     animation: animation 50s ease-in-out 5s infinite;

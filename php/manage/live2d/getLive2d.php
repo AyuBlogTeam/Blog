@@ -8,6 +8,7 @@
       public $content;
       public $ip;
       public $author;
+      public $time;
   }
 
   $sql = "SELECT * FROM LIVE2D order by id DESC limit $from,10";
@@ -21,6 +22,7 @@
           $data->key = $row["id"];
           $data->content = $row["content"];
           $data->ip = $row["ip"];
+          $data->time = $row["time"];
           $data->author = $row["author"];
           $returnResult->data->data[] = $data;
       }

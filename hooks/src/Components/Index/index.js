@@ -254,6 +254,24 @@ const IndexChildren = () => {
             align: "center"
           },
           {
+            title: "作者",
+            dataIndex: "author",
+            key: "author",
+            align: "center"
+          },
+          {
+            title: "IP",
+            dataIndex: "ip",
+            key: "ip",
+            align: "center"
+          },
+          {
+            title: "时间",
+            dataIndex: "time",
+            key: "time",
+            align: "center"
+          },
+          {
             title: "操作",
             key: "action",
             align: "center",

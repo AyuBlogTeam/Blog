@@ -3,7 +3,7 @@
     div.content
       div.search
         div
-          textarea(v-model="board",rows="3",cols="20")
+          textarea(placeholder="留下一句话吧",v-model="board",rows="3",cols="20")
           svg.icon(aria-hidden="true",@click="liveBoard")
             use(xlink:href="#icon-TIFFANYSROOM_huaban")
       div.list
@@ -27,10 +27,18 @@ export default class componentName extends Vue {
   mounted() {
     this.getInfo();
     document.addEventListener("scroll", this.scroll);
+    document.addEventListener("keydown", this.keydown);
   }
 
   beforeDestroy() {
     document.removeEventListener("scroll", this.scroll);
+    document.removeEventListener("keydown", this.keydown);
+  }
+
+  private keydown(e) {
+    if (e.keyCode === 13) {
+      this.liveBoard();
+    }
   }
 
   private scroll(e) {
@@ -96,7 +104,7 @@ export default class componentName extends Vue {
     width: 100%;
 
     div {
-      width: 50%;
+      width: 80%;
       text-align: center;
       margin: 0 auto;
       position: relative;

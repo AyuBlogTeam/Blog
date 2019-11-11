@@ -8,7 +8,7 @@ const LoginUi = props => {
     <div id="loginUI">
       <div className="header">阿鱼的研发日志</div>
       <div className="page">
-        <Particles id="particles" config="/hooks/particles/particles.json" />
+        <Particles id="particles" config="/particles/particles.json" />
       </div>
       <div className="login">
         <div className="title">管理员登录</div>

@@ -49,7 +49,7 @@ export default class Index extends Vue {
     document.addEventListener("keydown", this.keydown);
   }
 
-  destroyed() {
+  beforeDestroy() {
     document.removeEventListener("keydown", this.keydown);
   }
 

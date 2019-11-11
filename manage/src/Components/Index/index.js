@@ -274,6 +274,12 @@ class Index extends Component {
               align: "center"
             },
             {
+              title: "时间",
+              dataIndex: "time",
+              key: "time",
+              align: "center"
+            },
+            {
               title: "操作",
               key: "action",
               align: "center",
