@@ -229,11 +229,11 @@ strong, em {
     .phone {
       display: none;
       float: right;
-      margin-top: 5px;
+      margin-top: 15px;
 
       .icon {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
       }
     }
 
@@ -246,8 +246,8 @@ strong, em {
       top: 37px;
 
       .icon {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
       }
     }
 
