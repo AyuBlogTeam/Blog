@@ -13,8 +13,9 @@
         p 安妮宝贝 
         p 白茶清欢无别事,我在等风也等你。
         p 苦酒折柳今相离,无风无月也无你。
-      div.time
+      div.time(v-if="isShe")
         h1 {{time}}
+          span DAYS
       div.username
         h1 {{username}}
       div.footer 蜀ICP备18020911号
@@ -26,8 +27,14 @@ export default class Index extends Vue {
   private time: string = "0";
   private username: string = "AYUPERSON.TOP";
   private searchContent: string = "";
+  private isShe: boolean = false;
 
   mounted() {
+    if (this.$cookies.get("city") != null) {
+      if (this.$cookies.get("city").indexOf("杭州") != -1) {
+        this.isShe = true;
+      }
+    }
     this.time = (
       (new Date().getTime() - new Date("2016-02-19").getTime()) /
       86400000
@@ -78,6 +85,11 @@ export default class Index extends Vue {
     letter-spacing: 30px;
     padding-left: 30px;
     color: rgb(131, 175, 155);
+
+    span {
+      letter-spacing: 0;
+      font-size: 18px;
+    }
   }
 
   .search {
@@ -112,6 +124,11 @@ export default class Index extends Vue {
   }
 
   .username {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    left: 0;
+
     h1 {
       letter-spacing: 0px;
     }

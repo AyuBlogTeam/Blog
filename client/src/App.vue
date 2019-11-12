@@ -31,7 +31,8 @@ export default class App extends Vue {
 
   private scroll(e: object) {
     const allHeight: number = document.body.clientHeight;
-    const scrollHeight: number = document.documentElement.scrollTop;
+    const scrollHeight: number =
+      document.documentElement.scrollTop || document.body.scrollTop;
     const clientHeight: number = document.documentElement.clientHeight;
     if (scrollHeight > 200) {
       this.isShowTop = true;
@@ -43,13 +44,15 @@ export default class App extends Vue {
 
   private backToTop() {
     document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }
 
   private getInfo() {
     if (this.$cookies.get("ip") == null) {
       axios.get(IPserver + "ip/setIp.php").then(res => {
-        if (res.data.data != "") {
-          this.$cookies.set("ip", res.data.data, 60 * 60);
+        if (res.data != "") {
+          this.$cookies.set("ip", res.data.data.ip, 60 * 60);
+          this.$cookies.set("city", res.data.data.city, 60 * 60);
         }
       });
     }

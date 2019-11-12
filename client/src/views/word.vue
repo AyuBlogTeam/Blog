@@ -43,7 +43,8 @@ export default class componentName extends Vue {
 
   private scroll(e) {
     const allHeight: number = document.body.clientHeight;
-    const scrollHeight: number = document.documentElement.scrollTop;
+    const scrollHeight: number =
+      document.documentElement.scrollTop || document.body.scrollTop;
     const clientHeight: number = document.documentElement.clientHeight;
     if (scrollHeight / (allHeight - clientHeight) >= 1) {
       if (this.hasMore) {

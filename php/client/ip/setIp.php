@@ -35,7 +35,8 @@ if(!empty($ip_address)){
 			$result = $conn->query($sql);
 			if($result){
 				$returnResult = new Success();
-				$returnResult->data = $cip;
+				$returnResult->data->ip = $cip;
+				$returnResult->data->city = $cname;
 				echo json_encode($returnResult);
 			}
   		}else if($json->status == "302" || $json->status == "301"){
@@ -53,8 +54,9 @@ if(!empty($ip_address)){
 					$result = $conn->query($sql);
 					if($result){
 						$returnResult = new Success();
-						$returnResult->data = $cip;
-						echo json_encode($returnResult);
+            $returnResult->data->ip = $cip;
+            $returnResult->data->city = $cname;
+            echo json_encode($returnResult);
 					}
   				}
   			}
