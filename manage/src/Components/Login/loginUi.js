@@ -1,6 +1,6 @@
 import React from "react";
 import Particles from "reactparticles.js";
-import { Button } from "antd";
+import { Button, Icon } from "antd";
 
 const LoginUi = props => {
   const { loading, username, password, val } = props.all;
@@ -13,7 +13,9 @@ const LoginUi = props => {
       <div className="login">
         <div className="title">管理员登录</div>
         <div className="yz">
-          <span className="iconfont">&#xe613;</span>
+          <span className="iconfont">
+            <Icon type="user" />
+          </span>
           <input
             className="username"
             type="text"
@@ -22,7 +24,9 @@ const LoginUi = props => {
           />
         </div>
         <div className="yz">
-          <span className="iconfont">&#xe619;</span>
+          <span className="iconfont">
+            <Icon type="lock" className="iconfont" />
+          </span>
           <input
             className="password"
             type="password"
@@ -31,7 +35,9 @@ const LoginUi = props => {
           />
         </div>
         <div className="yz">
-          <span className="iconfont">&#xe667;</span>
+          <span className="iconfont">
+            <Icon type="check-circle" className="iconfont" />
+          </span>
           <canvas
             onClick={props.drow}
             id="canvas"

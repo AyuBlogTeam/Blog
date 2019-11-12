@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import "Styles/reset.styl";
-import "Iconfont/iconfont.css";
 import "Styles/index.styl";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";

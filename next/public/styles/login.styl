@@ -1,0 +1,98 @@
+#loginUI {
+    width: 100%;
+    height: 100%;
+
+    .header {
+        font-size: 30px;
+        color: #2198e6;
+        text-align: left;
+        margin-left: 20px;
+        line-height: 100px;
+    }
+
+    .page {
+        background: #000;
+        width: 100%;
+        height: calc(100vh - 200px);
+        overflow: hidden;
+        background-image: url('https://ayu-1256571018.cos.ap-chengdu.myqcloud.com/food/1.jpg');
+        position: relative;
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .login {
+        width: 20em;
+        height: 23em;
+        background: #fff;
+        border-radius: 8px;
+        position: absolute;
+        top: 50%;
+        margin-top: -12em;
+        right: 10em;
+        padding: 20px;
+        font-size: 16px;
+        box-sizing: content-box;
+
+        .title {
+            font-size: 24px;
+            color: #2198e6;
+            text-align: center;
+            line-height: 2em;
+        }
+
+        .yz {
+            width: 100%;
+            margin-top: 30px;
+            position: relative;
+            border: 1px solid #999;
+            line-height: 40px;
+            border-radius: 20px;
+
+            span {
+                padding-left: 20px;
+                padding-right: 20px;
+                border-right: 1px solid #999;
+            }
+
+            input {
+                border: none;
+                padding-left: 20px;
+                outline: none;
+            }
+
+            .canvas {
+                position: absolute;
+                top: 5px;
+                cursor: pointer;
+            }
+
+            .val {
+                width: 80px;
+                padding-left: 110px;
+                box-sizing: content-box;
+            }
+        }
+
+        .btn {
+            button {
+                width: 100%;
+                border-radius: 20px;
+                margin-top: 30px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                background: #20a0ff;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .footer {
+        margin-top: 20px;
+        color: #999;
+        text-align: center;
+    }
+}

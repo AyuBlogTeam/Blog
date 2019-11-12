@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 
 import "Styles/reset.styl";
-import "Iconfont/iconfont.css";
 import "Styles/index.styl";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
