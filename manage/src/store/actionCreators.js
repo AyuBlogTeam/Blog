@@ -41,45 +41,60 @@ export const getList = index => {
     switch (index) {
       case "1":
         url = IPserver + "articals/getArtical.php";
-        get(url).then(res => {
-          const action = setList(res);
-          dispatch(action);
-          const loading = setLoading(false);
-          dispatch(loading);
-        });
+        get(url)
+          .then(res => {
+            const action = setList(res);
+            dispatch(action);
+            const loading = setLoading(false);
+            dispatch(loading);
+          })
+          .catch(() => {
+            const loading = setLoading(false);
+            dispatch(loading);
+          });
         break;
       case "2":
         url = IPserver + "journals/getJournal.php";
-        get(url).then(res => {
-          const action = setList(res);
-          dispatch(action);
-          const loading = setLoading(false);
-          dispatch(loading);
-        });
+        get(url)
+          .then(res => {
+            const action = setList(res);
+            dispatch(action);
+            const loading = setLoading(false);
+            dispatch(loading);
+          })
+          .catch(() => {
+            const loading = setLoading(false);
+            dispatch(loading);
+          });
         break;
       case "3":
         url = IPserver + "records/getRecord.php";
-        get(url).then(res => {
-          if (res.length !== 0) {
-            let list = [];
-            res.map(item => {
-              if (item.content.length >= 30) {
-                item.title = item.content.substr(0, 30) + "...";
-              } else {
-                item.title = item.content;
-              }
-              list.push(item);
-              return item;
-            });
-            const action = setList(res);
-            dispatch(action);
-          } else {
-            const action = setList([]);
-            dispatch(action);
-          }
-          const loading = setLoading(false);
-          dispatch(loading);
-        });
+        get(url)
+          .then(res => {
+            if (res.length !== 0) {
+              let list = [];
+              res.map(item => {
+                if (item.content.length >= 30) {
+                  item.title = item.content.substr(0, 30) + "...";
+                } else {
+                  item.title = item.content;
+                }
+                list.push(item);
+                return item;
+              });
+              const action = setList(res);
+              dispatch(action);
+            } else {
+              const action = setList([]);
+              dispatch(action);
+            }
+            const loading = setLoading(false);
+            dispatch(loading);
+          })
+          .catch(() => {
+            const loading = setLoading(false);
+            dispatch(loading);
+          });
         break;
       default:
         break;

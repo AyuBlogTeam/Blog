@@ -106,6 +106,7 @@ class IndexUi extends Component {
           <Fragment>
             <div className="input">
               <Select
+                value={articalKind}
                 defaultValue={articalKind}
                 style={{ width: 200 }}
                 onChange={props.changeKind}

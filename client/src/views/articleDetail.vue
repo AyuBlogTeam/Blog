@@ -69,7 +69,9 @@ export default class articleDetails extends Vue {
 .htmlContent >>> pre {
   white-space: inherit;
 }
-
+.htmlContent >>> img{
+  width:100%;
+}
 .htmlContent {
   background: #fff;
   padding: 20px;

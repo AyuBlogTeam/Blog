@@ -211,18 +211,18 @@ strong, em {
         .underline {
           margin-top: 5px;
         }
-      }
 
-      li:hover {
-        color: rgb(200, 200, 109);
+        &:hover {
+          color: rgb(200, 200, 109);
 
-        .underline {
-          width: 100%;
+          .underline {
+            width: 100%;
+          }
         }
-      }
 
-      li.active {
-        color: rgb(200, 200, 109);
+        &.active {
+          color: rgb(200, 200, 109);
+        }
       }
     }
 
@@ -265,10 +265,10 @@ strong, em {
       span {
         display: inline-block;
         float: left;
-      }
 
-      span:nth-child(2) {
-        line-height: 46px;
+        &:nth-child(2) {
+          line-height: 46px;
+        }
       }
 
       .icon {

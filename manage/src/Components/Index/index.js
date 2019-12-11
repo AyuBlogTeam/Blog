@@ -349,14 +349,18 @@ class Index extends Component {
     this.props.setLoading(true);
     get(url, {
       from: (page - 1) * 10
-    }).then(res => {
-      this.setState({
-        tableData: res.data,
-        total: Number(res.total),
-        currentPage: page
+    })
+      .then(res => {
+        this.setState({
+          tableData: res.data,
+          total: Number(res.total),
+          currentPage: page
+        });
+        this.props.setLoading(false);
+      })
+      .catch(() => {
+        this.props.setLoading(false);
       });
-      this.props.setLoading(false);
-    });
   }
 
   // 渲染页面
@@ -446,7 +450,4 @@ const dispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  stateToProps,
-  dispatchToProps
-)(Index);
+export default connect(stateToProps, dispatchToProps)(Index);

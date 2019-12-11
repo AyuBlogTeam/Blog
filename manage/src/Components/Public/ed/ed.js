@@ -78,10 +78,19 @@ class Write extends Component {
           get(IPserver + "articals/getOneArtical.php", {
             articalid: this.props.currentId
           }).then(res => {
+            const file = [
+              {
+                uid: "-1",
+                status: "done",
+                url: res.coverimg
+              }
+            ];
             this.setState({
               articalTitle: res.title,
               articalSummary: res.summary,
-              articalId: this.props.currentId
+              articalId: this.props.currentId,
+              fileList: file,
+              articalKind: res.kind
             });
             this.editor.txt.html(res.content);
             this.props.setLoading(false);
@@ -91,10 +100,18 @@ class Write extends Component {
           get(IPserver + "journals/getOneJournal.php", {
             articalid: this.props.currentId
           }).then(res => {
+            const file = [
+              {
+                uid: "-1",
+                status: "done",
+                url: res.coverimg
+              }
+            ];
             this.setState({
               articalTitle: res.title,
               articalSummary: res.summary,
-              articalId: this.props.currentId
+              articalId: this.props.currentId,
+              fileList: file
             });
             this.editor.txt.html(res.content);
             this.props.setLoading(false);
@@ -268,7 +285,7 @@ class Write extends Component {
   }
 
   submit() {
-    let url, data;
+    let url, data, cover;
     switch (this.props.currentType) {
       case "1":
         if (this.state.articalTitle === "") {
@@ -287,13 +304,16 @@ class Write extends Component {
           message.warn("请输入文章内容");
           return;
         }
+        cover = this.state.fileList[0].response
+          ? this.state.fileList[0].response.data[0]
+          : this.state.fileList[0].url;
         url = IPserver + "articals/operationArtical.php";
         data = {
           articalId: this.state.articalId,
           title: this.state.articalTitle,
           summary: this.state.articalSummary,
           kind: this.state.articalKind,
-          coverImg: this.state.fileList[0].response.data[0],
+          coverImg: cover,
           content: this.editor.txt.html(),
           username: this.props.username
         };
@@ -315,12 +335,15 @@ class Write extends Component {
           message.warn("请输入文章内容");
           return;
         }
+        cover = this.state.fileList[0].response
+          ? this.state.fileList[0].response.data[0]
+          : this.state.fileList[0].url;
         url = IPserver + "journals/operationJournal.php";
         data = {
           articalId: this.state.articalId,
           title: this.state.articalTitle,
           summary: this.state.articalSummary,
-          coverImg: this.state.fileList[0].response.data[0],
+          coverImg: cover,
           content: this.editor.txt.html(),
           username: this.props.username
         };
@@ -413,7 +436,4 @@ const dispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  stateToProps,
-  dispatchToProps
-)(Write);
+export default connect(stateToProps, dispatchToProps)(Write);
